@@ -82,6 +82,37 @@ module.exports = {
                 id: 'Send-Button'
             }
         }
+    },
+    upload: {
+        buttons: {
+            upLoad: {
+                css: '[ng-click="uploadSingleWordDoc()"]'
+            },
+            close: {
+                xpath: "//BUTTON[@aria-label='close']"
+            },
+        }
+    },
+    edit: {
+        buttons: {
+            collaborates: {
+                xpath: "//DIV[@class='img-circle-bg invite-icon pull-left']"
+            },
+            email: {
+                model: 'newUser'
+            },
+            permission: {
+                dropdown: {
+                    xpath: "//STRONG[@class='ng-binding'][text()='Permission']"
+                }
+            },
+            viewOnly: {
+                xpath: "(//A[@ng-click='setPermission(item)'])[1]"
+            },
+            invite: {
+                xpath: "//BUTTON[@aria-label='confirm']"
+            }
+        }
     }
 
 }
