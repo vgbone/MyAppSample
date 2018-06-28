@@ -218,5 +218,6 @@ module.exports = {
         signatureAssertion: {
             xpath: '//div/canvas'
         },
+        // Signature.js end of section
     },
 }
