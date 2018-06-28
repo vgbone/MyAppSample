@@ -42,4 +42,11 @@ module.exports = {
         one: "AutoTest2",
         two: "AutuTest1"
     },
+    // CreateNewTemplate.js
+    title: {
+        sendKeys: "Template-Title"
+    },
+    body: {
+        sendKeys: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    }
 }
