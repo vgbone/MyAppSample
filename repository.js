@@ -195,6 +195,28 @@ module.exports = {
         iframe: {
             xpath: '//iframe[contains(@id, "ui-tinymce")]'
         },
-
-    }
+        // DocumentSignatureCaseManager.js end of section
+    },
+    //Signature.js
+    signSubmitSignature: {
+        buttons: {
+            signature: {
+                xpath: "(//SPAN[@class='sign-field assigned'])[1]"
+            },
+            signatureField: {
+                id: 'Signature'
+            },
+            submit: {
+                xpath: "//BUTTON[@aria-label='send']"
+            },
+        },
+        popUp: {
+            email: {
+                xpath: '//div[@class="toast-message" and contains(.,"You will receive an email notification once it has been accepted")]'
+            },
+        },
+        signatureAssertion: {
+            xpath: '//div/canvas'
+        },
+    },
 }
