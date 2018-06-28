@@ -34,8 +34,8 @@ describe('Paper | ContractClub', function() {
     });
 
 
-    it('Checks checkbox', function() {
-        element(by.xpath("(//DIV[@class='_md-container md-ink-ripple'])[2]")).click(); //click check box
+    it('Clicks ons checkbox', function() {
+        element(by.xpath(repo.paperdeep.checkbox.clickedcheckbox.xpath)).click(); //click check box
     });
 
     it('Creates a New template', function() {
@@ -55,13 +55,13 @@ describe('Paper | ContractClub', function() {
 
     //2. document settings
     it('Click on +New and select ‘draft’', function() {
-        element(by.xpath("(//A[@ui-sref='projects.workspace.documents'])[2]")).click(); //clicks homepage   
+        element(by.xpath(repo.paperdeep.document.newdraft.xpath)).click(); //clicks homepage   
         documents.ClickOnNewAndSelectDraft();
         documents.validateClickOnNewAndSelectDraft();
     });
 
     it('Share Documnet: Can view only', function() {
-        browser.sleep(3000);
+        browser.sleep(data.application.waitTime.default);
         shareDocuments.CanViewOnly();
         shareDocuments.validateCanViewOnly();
     });
@@ -79,7 +79,7 @@ describe('Paper | ContractClub', function() {
 
 
     it('Click ‘Upload’', function() {
-        browser.sleep(3000);
+        browser.sleep(data.application.waitTime.default);
         documents.ClickUpload();
         documents.validateClickUpload();
     });
@@ -106,7 +106,7 @@ describe('Paper | ContractClub', function() {
 
     //2. document settings
     it('Select new, draft', function() {
-            element(by.xpath("(//A[@ui-sref='projects.workspace.documents'])[2]")).click(); //clicks homepage
+            element(by.xpath(repo.paperdeep.documentsettings.newdraft.xpath)).click(); //clicks homepage
             documentSignatureCaseManager.SelectNewDraft();
             documentSignatureCaseManager.validateSelectNewDraft();
         }),
@@ -129,25 +129,25 @@ describe('Paper | ContractClub', function() {
     it('Click Submit from the popup menu', function() {
         //signature.validate_Click_Dropdown_Send();
 
-        browser.sleep(5000);
+        browser.sleep(data.application.waitTime.default);
         signature.ClickSubmit();
         signature.validateClickSubmit();
     });
 
-    browser.sleep(5000);
+    browser.sleep(data.application.waitTime.default);
 
     it('should logout', function() {
-        browser.sleep(5000);
-        element(by.xpath("(//A[@ui-sref='projects.workspace.documents'])[2]")).click(); //clicks homepage
-        browser.sleep(5000);
-        element(by.xpath('//a[@class="dropdown-toggle"]')).click();
-        browser.sleep(5000);
-        element(by.xpath('//i[@class="fa fa-sign-out"]')).click();
-        browser.sleep(5000);
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.logout.document.xpath)).click(); //clicks homepage
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.logout.navbar.xpath)).click();
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.logout.textedlink.xpath)).click();
+        browser.sleep(data.application.waitTime.default);
 
     });
     browser.wait(function() {
-        browser.sleep(5000)
+        browser.sleep(data.application.waitTime.default)
         return true;
     }).then(function() {
 
@@ -161,96 +161,96 @@ describe('Paper | ContractClub', function() {
     });
 
     it('select new, draft', function() {
-            element(by.xpath("(//DIV[@class='navbar-btn-container hidden-xs'])[2]")).click();
+            element(by.xpath(repo.paperdeep.newdraft.button.xpath)).click();
             documentSignatureCaseManager.SelectNewDraft();
-            browser.sleep(2000);
+            browser.sleep(data.application.waitTime.default);
             documentSignatureCaseManager.validateSelectNewDraft();
-            browser.sleep(2000);
+            browser.sleep(data.application.waitTime.default);
         }),
 
         it('document signature (All)', function() {
             documentSignatureCaseManager.DocumentSignatureCM();
-            browser.sleep(2000);
+            browser.sleep(data.application.waitTime.default);
             documentSignatureCaseManager.validateDocumentSignatureCM();
-            browser.sleep(2000);
+            browser.sleep(data.application.waitTime.default);
         }),
 
 
         it('click action', function() {
             signature.ClickAction();
-            browser.sleep(2000);
+            browser.sleep(data.application.waitTime.default);
             signature.validateClickAction();
-            browser.sleep(2000);
+            browser.sleep(data.application.waitTime.default);
         });
 
 
     it('click send from the dropdown menu', function() {
         signature.ClickDropdownSend();
-        browser.sleep(2000);
+        browser.sleep(data.application.waitTime.default);
         signature.validateClickDropdownSend();
-        browser.sleep(2000);
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('click submit from the popup menu', function() {
         signature.ClickSubmit();
-        browser.sleep(2000);
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('validate email sent popup', function() {
         signature.ValidateEmailSentPopup();
-        browser.sleep(7000);
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('login to outlook web', function() {
-        browser.sleep(3000);
+        browser.sleep(data.application.waitTime.default);
         login.outlookLogin();
         login.validateOutlookLogin();
-        browser.sleep(6000);
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('Outlook open mail and', function() {
         //Opens the Email.
 
-        browser.sleep(4000);
-        element(by.xpath("(//div[@autoid='_lv_i']//span[contains(.,'Document has been sent!')])[1]")).click();
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.email.sent.xpath)).click();
     });
 
     it('click paper login', function() {
         //Click the login.  
 
-        browser.sleep(4000);
-        element(by.xpath("//a[contains(., 'Login')]")).click();
-        browser.sleep(4000);
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.login.button.xpath)).click();
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('Click, Sign and submit Signature', function() {
-        browser.sleep(4000);
+        browser.sleep(data.application.waitTime.default);
         signature.ClickSignSubmitSignature(data.signature.two);
-        browser.sleep(5000);
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('login to outlook web', function() {
 
-        browser.sleep(5000);
+        browser.sleep(data.application.waitTime.default);
         browser.get(data.url2);
-        browser.sleep(6000);
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('Outlook open mail', function() {
         //Opens the Email.
 
-        browser.sleep(6000);
-        browser.sleep(6000);
-        element(by.xpath("(//div[@autoid='_lv_i']//span[contains(.,'Document has been marked as comp')])[1]")).click();
-        browser.sleep(5000);
+        browser.sleep(data.application.waitTime.default);
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.email.completed.xpath)).click();
+        browser.sleep(data.application.waitTime.default);
     });
 
     it('Click paper PDF', function() {
         //Click the login.
 
-        browser.sleep(3000);
-        element(by.xpath("//table/tbody//a[1]/span[contains(@title, 'Untitled')]")).click();
-        browser.sleep(3000);
+        browser.sleep(data.application.waitTime.default);
+        element(by.xpath(repo.paperdeep.button.pdf.xpath)).click();
+        browser.sleep(data.application.waitTime.default);
     });
 
 });

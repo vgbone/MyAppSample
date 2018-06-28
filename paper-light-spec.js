@@ -16,7 +16,7 @@ describe('Paper | ContractClub', function() {
     beforeEach(function() {
 
         browser.wait(function() {
-            browser.sleep(2000)
+            browser.sleep(data.application.waitTime.default)
             return true;
         }).then(function() {
 
@@ -63,7 +63,7 @@ describe('Paper | ContractClub', function() {
     //2. document settings
 
     it('Select new, draft', function() {
-            element(by.xpath("(//DIV[@class='navbar-btn-container hidden-xs'])[2]")).click();
+            element(by.xpath(repo.paperlight.document.newdraft.xpath)).click();
 
             documentSignatureCaseManager.SelectNewDraft();
             documentSignatureCaseManager.validateSelectNewDraft();

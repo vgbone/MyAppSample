@@ -82,6 +82,68 @@ module.exports = {
                 id: 'Send-Button'
             }
         }
+    },
+    ///new repository based on document name
+    paperlight: {
+        document: {
+            newdraft: {
+                xpath: '(//DIV[@class="navbar-btn-container hidden-xs"])[2]'
+            }
+
+        }
+    },
+    paperdeep: {
+        checkbox: {
+            clickedcheckbox: {
+                xpath: '(//DIV[@class="_md-container md-ink-ripple"])[2]'
+            }
+        },
+        document: {
+            newdraft: {
+                xpath: '(//A[@ui-sref="projects.workspace.documents"])[2]'
+            }
+        },
+        documentsettings: {
+            newdraft: {
+                xpath: '(//A[@ui-sref=projects.workspace.documents"])[2]'
+            }
+        },
+        logout: {
+            document: {
+                xpath: '(//A[@ui-sref="projects.workspace.documents"])[2]'
+
+            },
+            navbar: {
+                xpath: '//a[@class="dropdown-toggle"]'
+            },
+            textedlink: {
+                xpath: '//i[@class="fa fa-sign-out"]'
+            }
+        },
+        newdraft: {
+            button: {
+                xpath: '(//DIV[@class="navbar-btn-container hidden-xs"])[2]'
+            }
+        },
+        email: {
+            sent: {
+                xpath: '(//div[@autoid="_lv_i"]//span[contains(.,"Document has been sent!")])[1]'
+            },
+            completed: {
+                xpath: '(//div[@autoid="_lv_i"]//span[contains(.,"Document has been marked as comp")])[1]'
+            }
+        },
+        login: {
+            button: {
+                xpath: '//a[contains(., "Login")]'
+            }
+        },
+        button: {
+            pdf: {
+                xpath: '//table/tbody//a[1]/span[contains(@title, "Untitled")]'
+            }
+        }
+
     }
 
 }

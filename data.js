@@ -41,5 +41,5 @@ module.exports = {
     signature: {
         one: "AutoTest2",
         two: "AutuTest1"
-    }
+    },
 }
