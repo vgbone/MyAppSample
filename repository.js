@@ -177,5 +177,24 @@ module.exports = {
         addSignature: {
             css: '[ng-click="addSignature()"]'
         }
+        //Document.js end of section
+    },
+    //DocumentSignatureCaseManager.js
+    documentSignature: {
+        buttons: {
+            newSigner: {
+                id: 'newSigner'
+            },
+            clickToAssign: {
+                css: '.sign-field'
+            },
+            userSignedIn: {
+                xpath: "//*[@id='testdropdown']//li[@ng-repeat='contact in contacts']"
+            }
+        },
+        iframe: {
+            xpath: '//iframe[contains(@id, "ui-tinymce")]'
+        },
+
     }
 }
