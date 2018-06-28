@@ -63,7 +63,7 @@ describe('Paper | ContractClub', function() {
     //2. document settings
 
     it('Select new, draft', function() {
-            element(by.xpath(repo.paperlight.document.newdraft.xpath)).click();
+            element(by.xpath("(//DIV[@class='navbar-btn-container hidden-xs'])[2]")).click();
 
             documentSignatureCaseManager.SelectNewDraft();
             documentSignatureCaseManager.validateSelectNewDraft();
