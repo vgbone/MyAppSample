@@ -75,9 +75,6 @@ module.exports = {
             submitSignature: {
                 id: 'apply-sign'
             },
-            action: {
-                id: 'Ready-Button'
-            },
             dropdownSend: {
                 id: 'Send-Button'
             }
@@ -93,6 +90,8 @@ module.exports = {
             },
         }
     },
+
+    // Generic Share documents.js
     edit: {
         buttons: {
             collaborates: {
@@ -111,8 +110,72 @@ module.exports = {
             },
             invite: {
                 xpath: "//BUTTON[@aria-label='confirm']"
+            },
+            canEdit: {
+                xpath: "(//A[@ng-click='setPermission(item)'])[2]"
+            },
+            allAccess: {
+                xpath: "(//A[@ng-click='setPermission(item)'])[3]"
+            },
+            invite: {
+                xpath: "//BUTTON[@aria-label='confirm']"
+            },
+            apply: {
+                xpath: "//BUTTON[@aria-label='save']"
             }
+        },
+        editAssertion: {
+            assertion1: {
+                xpath: "//TD[@class='ng-binding'][text()='paperautotest1@outlook.com']"
+            },
+            assertion2: {
+                xpath: "//TD[@class='ng-binding'][text()='paperautotest2@outlook.com']"
+            },
+            assertion3: {
+                xpath: "//TD[@class='ng-binding'][text()='paperautotest3@outlook.com']"
+            },
+        },
+        // Shared Documents.js end of section
+    },
+    //Outlook "Login.js"
+    outlookLogin: {
+        textboxes: {
+            username: {
+                id: 'username'
+            },
+            password: {
+                id: 'password'
+            },
+        },
+        buttons: {
+            signIN: {
+                xpath: '//span[contains(.,"sign in")]'
+            },
+        },
+        // Login.js end of section    
+    },
+    //CreateNewTemplate.js
+    template: {
+        dropdown: {
+            id: 'NewTemplate-Documents'
+        },
+        iframe: {
+            xpath: '//iframe'
+        },
+        buttons: {
+            action: {
+                id: 'Ready-Button'
+            },
+            save: {
+                id: 'Save-Editor'
+            },
+        },
+        //CreateNewTEmplate.js end of section
+    },
+    //Document.js
+    documents: {
+        addSignature: {
+            css: '[ng-click="addSignature()"]'
         }
     }
-
 }
