@@ -9,14 +9,6 @@ exports.config = {
         shardTestFiles: true,
         maxInstances: 4
     },
-    'autoStartStopServer': true,
-
-    // capabilities: {
-    //     'browserName': 'internet explorer',
-    //     'platform': 'ANY',
-    //     'version': '11',
-    //     'ignoreProtectedModeSettings': true
-    // },
     restartBrowserBetweenTests: false,
     specs: ['spec.js'],
     mochaOpts: {
