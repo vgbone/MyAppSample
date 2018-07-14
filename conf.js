@@ -1,19 +1,24 @@
 exports.config = {
     framework: 'mocha',
-    chromeDriver: './node_modules/protractor/node_modules/webdriver-manager/selenium/chromedriver_2.40',
+    'autoStartStopServer': true,
+    // directConnect: true,
     capabilities: {
         browserName: 'chrome',
         chromeOptions: {
-            args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+            args: ["--headless", "--start-maximized", "--disable-gpu", "--no-sandbox"]
         },
         shardTestFiles: true,
         maxInstances: 4
     },
     restartBrowserBetweenTests: false,
-    specs: ['spec.js'],
+    specs: ['paper-light-spec.js'],
+    // seleniumAddress: 'http://localhost:4444/wd/hub/',
     mochaOpts: {
         reporter: 'spec',
         timeout: 30000
     },
-    directConnect: true
+    seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
+    onPrepare: function() {
+        require('./lib/waitReady')
+    }
 };

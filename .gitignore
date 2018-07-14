@@ -1,3 +1,62 @@
+# OS
+# ===========
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Node and related ecosystem
+# ==========================
+.nodemonignore
+.sass-cache/
 node_modules/
-.idea
-.bash*
+public/lib/
+sys/openstack/backup
+app/tests/coverage/
+sys/openstack/backup
+.bower-*/
+.idea/
+coverage/
+.coveralls.yml
+.vscode/
+.eslintrc.json
+variables.sh
+
+# Compiled less and sass files
+# ============================
+modules/*/client/scss/*.css
+modules/*/client/less/*.css
+
+
+# General
+# =======
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+*.pem
+logs/
+build/
+
+# Sublime editor
+# ==============
+.sublime-project
+*.sublime-project
+*.sublime-workspace
+
+# Visual Studio Code editor
+# =========================
+.vscode/
+
+# Atom.io Code editor
+# =========================
+.remote-sync.json

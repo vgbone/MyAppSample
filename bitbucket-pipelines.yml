@@ -1,0 +1,42 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: 
+  name: paperapp/selenium-testing
+  username: paperapp
+  password: $DOCKER_PW
+  email: accounts@get-paper.com
+
+pipelines:
+  default:
+    - step:
+        name: Default Pipeline
+        caches:
+          - node
+        script: 
+          - declare -x TWILIO_SID=$TWILIO_SID;
+          - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+          - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+          - declare -x OPS_CONTACT=$OPS_CONTACT;
+          - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+          - npm install
+          - webdriver-manager update
+          - webdriver-manager start & sleep 5; gulp
+  
+  custom:
+    uptime check:
+      - step:
+          name: Master Pipeline
+          caches:
+            - node
+          script: 
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
