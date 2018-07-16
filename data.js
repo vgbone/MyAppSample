@@ -1,5 +1,5 @@
 module.exports = {
-    url: 'https://secure.paperlts.com/static/#/login',
+    url: 'https://secure.athennian.com/static/#/login',
     mailURL: 'https://secure.pqatesting.com/owa/#path=/mail',
 
     credentials: {

@@ -1,7 +1,7 @@
 exports.config = {
     framework: 'mocha',
     'autoStartStopServer': true,
-    // directConnect: true,
+    directConnect: true,
     capabilities: {
         browserName: 'chrome',
         chromeOptions: {
@@ -18,7 +18,7 @@ exports.config = {
         timeout: 30000
     },
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
-    onPrepare: function() {
+    onPrepare: function () {
         require('./lib/waitReady')
     }
 };
