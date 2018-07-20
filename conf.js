@@ -1,18 +1,30 @@
 exports.config = {
     framework: 'mocha',
-    'autoStartStopServer': true,
     //directConnect: true,
-    capabilities: {
-        browserName: 'chrome',
-        chromeOptions: {
-            args: ["--start-maximized", "--disable-gpu", "--no-sandbox"]
-        },
-        shardTestFiles: true,
-        maxInstances: 4
+    // capabilities: {
+    //     browserName: 'firefox',
+    //     //marionette: false,
+    //     // browserName: 'chrome',
+    //     // chromeOptions: {
+    //     //     args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+    //     // },
+    //     // shardTestFiles: true,
+    //     // maxInstances: 4
+    // },
+    multiCapabilities: [{
+        'browserName': 'firefox',
+        count: 1,
+        shardTestFiles: false,
+        maxInstances: 2
     },
-    restartBrowserBetweenTests: false,
-    specs: ['paper-light-spec.js'],
-    seleniumAddress: 'http://localhost:4444/wd/hub/',
+    {
+        'browserName': 'chrome',
+        count: 1,
+        shardTestFiles: true,
+        maxInstances: 2
+    }],
+    specs: ['Athennian-deep-spec.js'],
+    seleniumAddress: 'http://pqa-0352lt:4444/wd/hub/',
     mochaOpts: {
         reporter: 'spec',
         timeout: 30000
