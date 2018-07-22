@@ -1,52 +1,41 @@
-var superagent = require('superagent')
-var chai = require('chai')
-var expect = chai.expect;
-var data = require('./data')
-var repo = require('./repository')
-var signature = require('./lib/signature')
 var login = require('./lib/login')
-var Documents = require('./lib/Documents')
-var DocumentSignatureCaseManager = require('./lib/DocumentSignatureCaseManager')
-var AddNewSignatureRecipient = require('./lib/AddNewSignatureRecipient')
 var CreateNewtemplate = require('./lib/CreateNewTemplate')
-var ShareDocuments = require('./lib/ShareDocuments')
-var url = require('./data');
 
-describe('Athennian', function () {
-    beforeEach(function () {
+describe('Athennian', function() {
+    beforeEach(function() {
 
-        browser.wait(function () {
+        browser.wait(function() {
             browser.sleep(5000)
             return true;
-        }).then(function () {
+        }).then(function() {
 
         });
     });
 
     //1. login begin
-    it('Should login', function () {
+    it('Should login', function() {
         //login begin  
         login.login();
         login.validatelogin();
     });
 
-    it('Checks checkbox', function () {
+    it('Checks checkbox', function() {
         element(by.xpath("(//DIV[@class='_md-container md-ink-ripple'])[2]")).click(); //click check box
     });
 
-    it('Creates a New template', function () {
+    it('Creates a New template', function() {
 
         CreateNewtemplate.SelectNewTemplate();
         CreateNewtemplate.validateSelectNewTemplate();
     });
 
-    it('Enters Template Information', function () {
+    it('Enters Template Information', function() {
 
         CreateNewtemplate.EnterTemplateInfo();
         CreateNewtemplate.validateEnterTemplateInfo();
     });
 
-    it('Save Finished Template', function () {
+    it('Save Finished Template', function() {
 
         CreateNewtemplate.SaveFinishedTemplate();
         CreateNewtemplate.validateSaveFinishedTemplate();
