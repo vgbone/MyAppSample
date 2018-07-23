@@ -18,8 +18,8 @@ exports.config = {
         // }
     ],
     specs: ['Athennian-light-spec.js'],
-    seleniumAddress: 'http://pqa-0352lt:4444/wd/hub/',
-    // seleniumAddress: 'http://localhost:4444/wd/hub/',
+    // seleniumAddress: 'http://pqa-0352lt:4444/wd/hub/',
+    seleniumAddress: 'http://localhost:4444/wd/hub/',
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         showColors: true,
@@ -31,6 +31,8 @@ exports.config = {
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
     onPrepare: function() {
         require('./lib/waitReady');
+
+        browser.manage().window().maximize();
 
         jasmine.getEnv().addReporter(new SpecReporter({
             displayFailuresSummary: true,

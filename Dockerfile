@@ -9,8 +9,8 @@ ARG UBUNTU_MIRROR=http://archive.ubuntu.com/ubuntu
 
 #== Ubuntu flavors - common
 RUN  echo "deb ${UBUNTU_MIRROR} ${UBUNTU_FLAVOR} main universe\n" > /etc/apt/sources.list \
-  && echo "deb ${UBUNTU_MIRROR} ${UBUNTU_FLAVOR}-updates main universe\n" >> /etc/apt/sources.list \
-  && echo "deb ${UBUNTU_MIRROR} ${UBUNTU_FLAVOR}-security main universe\n" >> /etc/apt/sources.list
+    && echo "deb ${UBUNTU_MIRROR} ${UBUNTU_FLAVOR}-updates main universe\n" >> /etc/apt/sources.list \
+    && echo "deb ${UBUNTU_MIRROR} ${UBUNTU_FLAVOR}-security main universe\n" >> /etc/apt/sources.list
 
 MAINTAINER Team EP <diemol+team-ep@gmail.com>
 # https://github.com/docker/docker/pull/25466#discussion-diff-74622923R677
@@ -23,16 +23,16 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # http://askubuntu.com/a/235911/134645
 # Remove with: sudo apt-key del 2EA8F35793D8809A
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A \
-  && apt-key update -qqy
+    && apt-key update -qqy
 # Remove with: sudo apt-key del 40976EAF437D05B5
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 \
-  && apt-key update -qqy
+    && apt-key update -qqy
 # Remove with: sudo apt-key del 3B4FE6ACC0B21F32
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 \
-  && apt-key update -qqy
+    && apt-key update -qqy
 # Remove with: sudo apt-key del A2F683C52980AECF
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A2F683C52980AECF \
-  && apt-key update -qqy
+    && apt-key update -qqy
 
 #========================
 # Miscellaneous packages
@@ -79,7 +79,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A2F683C52980AECF \
 # Layer size: medium: 33.3 MB
 # Layer size: medium: 31.4 MB (with --no-install-recommends)
 RUN apt-get -qqy update \
-  && apt-get -qqy install \
+    && apt-get -qqy install \
     libltdl7 \
     netcat-openbsd \
     pwgen \
@@ -97,8 +97,8 @@ RUN apt-get -qqy update \
     wget \
     curl \
     apache2-utils \
-  && apt-get -qyy autoremove \
-  && rm -rf /var/lib/apt/lists/*
+    && apt-get -qyy autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 #######################
 # Nginx reverse proxy #
@@ -108,18 +108,18 @@ RUN apt-get -qqy update \
 # Layer size: medium: 44.84 MB (with --no-install-recommends)
 # Layer size: medium: 50.51 MB
 RUN apt-get -qqy update \
-  && apt-get -qqy --no-install-recommends install \
+    && apt-get -qqy --no-install-recommends install \
     nginx-extras \
-  && apt-get -qyy autoremove \
-  && rm -rf /var/lib/apt/lists/* \
-  && nginx -v \
-  && ln -s /usr/sbin/nginx /usr/bin/ \
-  && /usr/bin/nginx -v \
-  && chmod -R 777 /var/log/nginx \
-  && chmod -R 777 /var/run/ \
-  && chmod -R 777 /var/lib/nginx \
-  && chmod -R 777 /usr/share/nginx/ \
-  && chmod -R 777 /tmp
+    && apt-get -qyy autoremove \
+    && rm -rf /var/lib/apt/lists/* \
+    && nginx -v \
+    && ln -s /usr/sbin/nginx /usr/bin/ \
+    && /usr/bin/nginx -v \
+    && chmod -R 777 /var/log/nginx \
+    && chmod -R 777 /var/run/ \
+    && chmod -R 777 /var/lib/nginx \
+    && chmod -R 777 /usr/share/nginx/ \
+    && chmod -R 777 /tmp
 
 #==============================
 # Locale and encoding settings
@@ -134,14 +134,14 @@ ENV LANG ${LANGUAGE}
 # Layer size: small: ~9 MB
 # Layer size: small: ~9 MB MB (with --no-install-recommends)
 RUN apt-get -qqy update \
-  && apt-get -qqy --no-install-recommends install \
+    && apt-get -qqy --no-install-recommends install \
     language-pack-en \
     tzdata \
     locales \
-  && locale-gen ${LANGUAGE} \
-  && dpkg-reconfigure --frontend noninteractive locales \
-  && apt-get -qyy autoremove \
-  && rm -rf /var/lib/apt/lists/*
+    && locale-gen ${LANGUAGE} \
+    && dpkg-reconfigure --frontend noninteractive locales \
+    && apt-get -qyy autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 #===================
 # Timezone settings
@@ -153,26 +153,26 @@ ENV TZ "Europe/Berlin"
 # Apply TimeZone
 # Layer size: tiny: 1.339 MB
 RUN echo "Setting time zone to '${TZ}'" \
-  && echo "${TZ}" > /etc/timezone \
-  && dpkg-reconfigure --frontend noninteractive tzdata
+    && echo "${TZ}" > /etc/timezone \
+    && dpkg-reconfigure --frontend noninteractive tzdata
 
 #========================================
 # Add normal user with passwordless sudo
 #========================================
 # Layer size: tiny: 0.3 MB
 RUN useradd seluser \
-         --shell /bin/bash  \
-         --create-home \
-  && usermod -a -G sudo seluser \
-  && gpasswd -a seluser video \
-  && echo 'seluser:secret' | chpasswd \
-  && useradd extrauser \
-         --shell /bin/bash  \
-  && usermod -a -G sudo extrauser \
-  && gpasswd -a extrauser video \
-  && gpasswd -a extrauser seluser \
-  && echo 'extrauser:secret' | chpasswd \
-  && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers
+    --shell /bin/bash  \
+    --create-home \
+    && usermod -a -G sudo seluser \
+    && gpasswd -a seluser video \
+    && echo 'seluser:secret' | chpasswd \
+    && useradd extrauser \
+    --shell /bin/bash  \
+    && usermod -a -G sudo extrauser \
+    && gpasswd -a extrauser video \
+    && gpasswd -a extrauser seluser \
+    && echo 'extrauser:secret' | chpasswd \
+    && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 #==============================
 # Java8 - OpenJDK JRE headless
@@ -184,14 +184,14 @@ RUN useradd seluser \
 # Layer size: big: 132.2 MB
 # Layer size: big: 132.2 MB (with --no-install-recommends)
 RUN apt-get -qqy update \
-  && apt-get -qqy install \
+    && apt-get -qqy install \
     openjdk-8-jre-headless \
-  && sed -i 's/securerandom.source=file:\/dev\/urandom/securerandom.source=file:\/dev\/.\/urandom/g' \
-       /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security \
-  && sed -i 's/securerandom.source=file:\/dev\/random/securerandom.source=file:\/dev\/.\/urandom/g' \
-       /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security \
-  && apt-get -qyy autoremove \
-  && rm -rf /var/lib/apt/lists/*
+    && sed -i 's/securerandom.source=file:\/dev\/urandom/securerandom.source=file:\/dev\/.\/urandom/g' \
+    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security \
+    && sed -i 's/securerandom.source=file:\/dev\/random/securerandom.source=file:\/dev\/.\/urandom/g' \
+    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security \
+    && apt-get -qyy autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 #==============================================
 # Java blocks until kernel have enough entropy
@@ -200,13 +200,13 @@ RUN apt-get -qqy update \
 # See: SeleniumHQ/docker-selenium/issues/14
 # Layer size: tiny: 0.8 MB
 RUN apt-get -qqy update \
-  && apt-key update -qqy \
-  && apt-get -qqy install \
+    && apt-key update -qqy \
+    && apt-get -qqy install \
     haveged rng-tools \
-  && service haveged start \
-  && update-rc.d haveged defaults \
-  && apt-get -qyy autoremove \
-  && rm -rf /var/lib/apt/lists/*
+    && service haveged start \
+    && update-rc.d haveged defaults \
+    && apt-get -qyy autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 #==============================================================
 # Kubernetes doesn't need gosu or docker
@@ -221,12 +221,12 @@ ARG kubernetesSlimVersion=false
 #==============================================================
 # https://github.com/tianon/gosu
 RUN if [ "${kubernetesSlimVersion}" = "false" ]; then \
-        wget -nv -O /usr/bin/gosu \
-            "https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64" \
-        && chmod +x /usr/bin/gosu \
-        && gosu root bash -c 'whoami' | grep root; \
+    wget -nv -O /usr/bin/gosu \
+    "https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64" \
+    && chmod +x /usr/bin/gosu \
+    && gosu root bash -c 'whoami' | grep root; \
     else \
-        echo "Skipping gosu because building in kubernetes slim mode"; \
+    echo "Skipping gosu because building in kubernetes slim mode"; \
     fi
 
 #=====================
@@ -243,16 +243,16 @@ ENV DOCKER_HOST="unix:///var/run/docker.sock" \
 # https://github.com/docker-library/docker/blob/master/17.09/Dockerfile
 # Note: Starting with 1.13, newer CLIs can talk to older daemons
 RUN if [ "${kubernetesSlimVersion}" = "false" ]; then \
-        set -x \
-        && DOCKER_VERSION="17.09.1-ce" \
-        && curl -fSL "https://${DOCKER_BUCKET}/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" \
-                -o docker.tgz \
-        && tar -xzvf docker.tgz \
-        && mv docker/docker /usr/bin/docker-${DOCKER_VERSION} \
-        && rm -rf docker/ && rm docker.tgz \
-        && docker-${DOCKER_VERSION} --version | grep "${DOCKER_VERSION}"; \
+    set -x \
+    && DOCKER_VERSION="17.09.1-ce" \
+    && curl -fSL "https://${DOCKER_BUCKET}/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" \
+    -o docker.tgz \
+    && tar -xzvf docker.tgz \
+    && mv docker/docker /usr/bin/docker-${DOCKER_VERSION} \
+    && rm -rf docker/ && rm docker.tgz \
+    && docker-${DOCKER_VERSION} --version | grep "${DOCKER_VERSION}"; \
     else \
-        echo "Skipping adding Docker because of kubernetes slim mode"; \
+    echo "Skipping adding Docker because of kubernetes slim mode"; \
     fi
 
 #----------------------------
@@ -261,16 +261,16 @@ RUN if [ "${kubernetesSlimVersion}" = "false" ]; then \
 # https://github.com/docker-library/docker/blob/master/17.09/Dockerfile
 # Note: Starting with 1.13, newer CLIs can talk to older daemons
 RUN if [ "${kubernetesSlimVersion}" = "false" ]; then \
-        set -x \
-        && DOCKER_VERSION="17.12.0-ce" \
-        && curl -fSL "https://${DOCKER_BUCKET}/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" \
-                -o docker.tgz \
-        && tar -xzvf docker.tgz \
-        && mv docker/docker /usr/bin/docker-${DOCKER_VERSION} \
-        && rm -rf docker/ && rm docker.tgz \
-        && docker-${DOCKER_VERSION} --version | grep "${DOCKER_VERSION}"; \
+    set -x \
+    && DOCKER_VERSION="17.12.0-ce" \
+    && curl -fSL "https://${DOCKER_BUCKET}/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" \
+    -o docker.tgz \
+    && tar -xzvf docker.tgz \
+    && mv docker/docker /usr/bin/docker-${DOCKER_VERSION} \
+    && rm -rf docker/ && rm docker.tgz \
+    && docker-${DOCKER_VERSION} --version | grep "${DOCKER_VERSION}"; \
     else \
-        echo "Skipping adding Docker because of kubernetes slim mode"; \
+    echo "Skipping adding Docker because of kubernetes slim mode"; \
     fi
 
 
@@ -282,13 +282,13 @@ RUN if [ "${kubernetesSlimVersion}" = "false" ]; then \
 ENV SAUCE_CONN_VER="sc-4.4.12-linux" \
     SAUCE_CONN_DOWN_URL="https://saucelabs.com/downloads"
 RUN cd /tmp \
-  && wget -nv "${SAUCE_CONN_DOWN_URL}/${SAUCE_CONN_VER}.tar.gz" \
-  && tar -zxf "${SAUCE_CONN_VER}.tar.gz" \
-  && rm -rf /usr/local/${SAUCE_CONN_VER} \
-  && mv ${SAUCE_CONN_VER} /usr/local \
-  && rm "${SAUCE_CONN_VER}.tar.gz" \
-  && ln -sf /usr/local/${SAUCE_CONN_VER}/bin/sc /usr/local/bin/sc \
-  && which sc
+    && wget -nv "${SAUCE_CONN_DOWN_URL}/${SAUCE_CONN_VER}.tar.gz" \
+    && tar -zxf "${SAUCE_CONN_VER}.tar.gz" \
+    && rm -rf /usr/local/${SAUCE_CONN_VER} \
+    && mv ${SAUCE_CONN_VER} /usr/local \
+    && rm "${SAUCE_CONN_VER}.tar.gz" \
+    && ln -sf /usr/local/${SAUCE_CONN_VER}/bin/sc /usr/local/bin/sc \
+    && which sc
 
 # -----------------------#
 # BrowserStack Tunneling #
@@ -298,12 +298,12 @@ RUN cd /tmp \
 ENV BSTACK_TUNNEL_URL="https://www.browserstack.com/browserstack-local" \
     BSTACK_TUNNEL_ZIP="BrowserStackLocal-linux-x64.zip"
 RUN cd /tmp \
-  && wget -nv "${BSTACK_TUNNEL_URL}/${BSTACK_TUNNEL_ZIP}" \
-  && unzip "${BSTACK_TUNNEL_ZIP}" \
-  && chmod 755 BrowserStackLocal \
-  && rm "${BSTACK_TUNNEL_ZIP}" \
-  && mv BrowserStackLocal /usr/local/bin \
-  && which BrowserStackLocal
+    && wget -nv "${BSTACK_TUNNEL_URL}/${BSTACK_TUNNEL_ZIP}" \
+    && unzip "${BSTACK_TUNNEL_ZIP}" \
+    && chmod 755 BrowserStackLocal \
+    && rm "${BSTACK_TUNNEL_ZIP}" \
+    && mv BrowserStackLocal /usr/local/bin \
+    && which BrowserStackLocal
 
 # -----------------------#
 # TestingBot Tunneling #
@@ -313,12 +313,12 @@ ENV TB_TUNNEL_URL="https://testingbot.com/tunnel/testingbot-tunnel.jar"
 # If you need to disable testingBot at build time set a build arg of testingBotEnabled=false
 ARG testingBotEnabled=true
 RUN if [ "${testingBotEnabled}" = "true" ]; then \
-  cd /tmp \
-  && wget -nv "${TB_TUNNEL_URL}" \
-  && mv testingbot-tunnel.jar /usr/local/bin \
-  && java -jar /usr/local/bin/testingbot-tunnel.jar --version; \
-  else echo "Testing Bot Disabled"; \
-  fi
+    cd /tmp \
+    && wget -nv "${TB_TUNNEL_URL}" \
+    && mv testingbot-tunnel.jar /usr/local/bin \
+    && java -jar /usr/local/bin/testingbot-tunnel.jar --version; \
+    else echo "Testing Bot Disabled"; \
+    fi
 
 #===================================================
 # Run the following commands as non-privileged user
@@ -356,22 +356,22 @@ COPY nginx.conf /etc/nginx/
 COPY css/ /home/seluser/css/
 COPY js/ /home/seluser/js/
 COPY zalenium.sh \
- LICENSE.md \
- Analytics.md \
- start-browserstack.sh \
- wait-browserstack.sh \
- start-saucelabs.sh \
- wait-saucelabs.sh \
- start-testingbot.sh \
- wait-testingbot.sh \
- list_template.html \
- dashboard_template.html \
- index.html \
- zalando.ico \
- logging_info.properties \
- logging_debug.properties \
- logback.xml \
- /home/seluser/
+    LICENSE.md \
+    Analytics.md \
+    start-browserstack.sh \
+    wait-browserstack.sh \
+    start-saucelabs.sh \
+    wait-saucelabs.sh \
+    start-testingbot.sh \
+    wait-testingbot.sh \
+    list_template.html \
+    dashboard_template.html \
+    index.html \
+    zalando.ico \
+    logging_info.properties \
+    logging_debug.properties \
+    logback.xml \
+    /home/seluser/
 COPY scm-source.json /
 COPY ${ZAL_VER}.jar /home/seluser/${ZAL_VER}.jar
 
@@ -379,18 +379,18 @@ COPY ${ZAL_VER}.jar /home/seluser/${ZAL_VER}.jar
 # Fix perms again #
 #-----------------#
 RUN sudo chmod +x /home/seluser/zalenium.sh \
-  && sudo chmod +x /home/seluser/start-browserstack.sh \
-  && sudo chmod +x /home/seluser/wait-browserstack.sh \
-  && sudo chmod +x /home/seluser/start-saucelabs.sh \
-  && sudo chmod +x /home/seluser/wait-saucelabs.sh \
-  && sudo chmod +x /home/seluser/start-testingbot.sh \
-  && sudo chmod +x /home/seluser/wait-testingbot.sh \
-  && sudo chmod +x /usr/bin/log \
-  && sudo chmod +x /usr/bin/warn \
-  && sudo chmod +x /usr/bin/error \
-  && sudo chmod +x /usr/bin/entry.sh \
-  && sudo chmod 777 /etc/passwd \
-  && sudo chown -R seluser:seluser /home/seluser
+    && sudo chmod +x /home/seluser/start-browserstack.sh \
+    && sudo chmod +x /home/seluser/wait-browserstack.sh \
+    && sudo chmod +x /home/seluser/start-saucelabs.sh \
+    && sudo chmod +x /home/seluser/wait-saucelabs.sh \
+    && sudo chmod +x /home/seluser/start-testingbot.sh \
+    && sudo chmod +x /home/seluser/wait-testingbot.sh \
+    && sudo chmod +x /usr/bin/log \
+    && sudo chmod +x /usr/bin/warn \
+    && sudo chmod +x /usr/bin/error \
+    && sudo chmod +x /usr/bin/entry.sh \
+    && sudo chmod 777 /etc/passwd \
+    && sudo chown -R seluser:seluser /home/seluser
 
 # Allows different operations in Openshift environments
 # https://docs.openshift.com/container-platform/latest/creating_images/guidelines.html#openshift-specific-guidelines
