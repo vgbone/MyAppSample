@@ -332,7 +332,7 @@ WORKDIR /home/seluser
 #==========
 EXPOSE 4444 4445
 
-ENV ZAL_VER="${project.build.finalName}" \
+ENV ZAL_VER="zalenium-john" \
     BROWSER_STACK_TUNNEL_OPTS="-skipCheck -v -forcelocal" \
     BROWSER_STACK_TUNNEL_ID="zalenium" \
     BROWSER_STACK_TUNNEL="false" \
@@ -351,29 +351,34 @@ ENV ZAL_VER="${project.build.finalName}" \
     SELENIUM_CONTAINER_LABELS="" \
     SELENIUM_WAIT_FOR_CONTAINER="true"
 
-COPY entry.sh log warn error /usr/bin/
-COPY nginx.conf /etc/nginx/
-COPY css/ /home/seluser/css/
-COPY js/ /home/seluser/js/
-COPY zalenium.sh \
-    LICENSE.md \
-    Analytics.md \
-    start-browserstack.sh \
-    wait-browserstack.sh \
-    start-saucelabs.sh \
-    wait-saucelabs.sh \
-    start-testingbot.sh \
-    wait-testingbot.sh \
-    list_template.html \
-    dashboard_template.html \
-    index.html \
-    zalando.ico \
-    logging_info.properties \
-    logging_debug.properties \
-    logback.xml \
-    /home/seluser/
-COPY scm-source.json /
-COPY ${ZAL_VER}.jar /home/seluser/${ZAL_VER}.jar
+RUN echo "$PWD"
+
+# COPY entry.sh /entry.sh
+COPY /docker-scripts/entry.sh /docker-scripts/log /docker-scripts/warn /docker-scripts/error /usr/bin/
+COPY /docker-scripts/nginx.conf /etc/nginx/
+COPY /dashboard/css/ /home/seluser/css/
+COPY /dashboard/js/ /home/seluser/js/
+COPY /docker-scripts/zalenium.sh \
+ /zalenium-license/LICENSE.md \
+ /zalenium-license/Analytics.md \
+ /docker-scripts/start-browserstack.sh \
+ /docker-scripts/wait-browserstack.sh \
+ /docker-scripts/start-saucelabs.sh \
+ /docker-scripts/wait-saucelabs.sh \
+ /docker-scripts/start-testingbot.sh \
+ /docker-scripts/wait-testingbot.sh \
+ /dashboard/list_template.html \
+ /dashboard/dashboard_template.html \
+ /dashboard/index.html \
+ /dashboard/zalando.ico \
+ /zalenium-license/logging_info.properties \
+ /zalenium-license/logging_debug.properties \
+ /zalenium-license/logback.xml \
+ /home/seluser/
+COPY /zalenium-license/scm-source.json /
+# COPY ${ZAL_VER}.jar /home/seluser/${ZAL_VER}.jar
+
+
 
 #-----------------#
 # Fix perms again #
