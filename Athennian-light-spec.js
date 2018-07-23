@@ -3,7 +3,8 @@ var login = require('./lib/login')
 var Documents = require('./lib/Documents')
 var DocumentSignatureCaseManager = require('./lib/DocumentSignatureCaseManager')
 
-
+var LoginPage = require('./lib/LoginPage')
+var loginPage = new LoginPage();
 
 describe('Athennian - light spec', function() {
 
@@ -11,8 +12,10 @@ describe('Athennian - light spec', function() {
     describe('Login', function() {
         //1. login begin
         it('should login', function() {
-            login.login();
-            login.validatelogin();
+            // login.login();
+            // login.validatelogin();
+            loginPage.getLoginPage();
+            loginPage.login();
         });
         //1. login end
     })
