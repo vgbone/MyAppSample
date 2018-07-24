@@ -20,6 +20,7 @@ exports.config = {
     specs: ['Athennian-light-spec.js'],
     // seleniumAddress: 'http://pqa-0352lt:4444/wd/hub/',
     seleniumAddress: 'http://localhost:4444/wd/hub/',
+    // seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         showColors: true,
