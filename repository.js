@@ -14,6 +14,16 @@ module.exports = {
             }
         }
     },
+    logout: {
+        dropDown: {
+            xpath: '//a[@class="dropdown-toggle"]'
+        },
+        buttons: {
+            signOut: {
+                xpath: '//i[@class="fa fa-sign-out"]'
+            }
+        }
+    },
     mailLogin: {
         textfields: {
             username: {
@@ -28,7 +38,6 @@ module.exports = {
                 xpath: "//span[contains(.,'sign in')]"
             }
         }
-
     },
     newDraft: {
         buttons: {
@@ -37,7 +46,6 @@ module.exports = {
             }
         }
     },
-
     //2. document settings
     documents: {
         buttons: {
@@ -46,6 +54,10 @@ module.exports = {
             },
             draft: {
                 id: "NewDraft-Documents"
+            },
+            //added
+            template: {
+                id: 'NewTemplate-Documents'
             },
             exit_upload_popup: {
                 id: 'cancel-sign'
@@ -64,7 +76,10 @@ module.exports = {
             //added
             signatureContainer: {
                 xpath: "(//SPAN[@class='sign-field assigned'])[1]"
-            }
+            },
+            canvas: {
+                xpath: '//div/canvas'
+            },
         },
         textfields: {
             title: {
@@ -90,7 +105,6 @@ module.exports = {
         iframe: {
             xpath: '//iframe[@id="ui-tinymce-1_ifr"]'
         },
-
         //4. Signature Required
         signature: {
             textfields: {
@@ -124,6 +138,29 @@ module.exports = {
                 }
             }
         }
-
-    }
+    },
+    // Template info section
+    templateInfo: {
+        buttons: {
+            blankTemplate: {
+                xpath: "//a[@title='New template']/h4[contains(., 'Blank template')]"
+            },
+        },
+        dropDown: {
+            action: {
+                xpath: '//button[contains(.,"Action")]'
+            },
+            save: {
+                id: 'Save-Editor'
+            },
+        },
+        textfields: {
+            clear: {
+                id: 'input_title'
+            },
+            input: {
+                xpath: '//*[@id="tinymce"]'
+            },
+        }
+    },
 }  

@@ -1,47 +1,45 @@
 var login = require('./lib/login')
 var CreateNewtemplate = require('./lib/CreateNewTemplate')
+var ShareDocuments = require('./lib/ShareDocuments')
+var Documents = require('./lib/Documents')
+describe('Athennian - deep spec', function () {
+    beforeEach(function () {
 
-describe('Athennian', function() {
-    beforeEach(function() {
-
-        browser.wait(function() {
+        browser.wait(function () {
             browser.sleep(5000)
             return true;
-        }).then(function() {
+        }).then(function () {
 
         });
     });
 
     //1. login begin
-    it('Should login', function() {
+    it('Should login', function () {
         //login begin  
         login.login();
         login.validatelogin();
     });
 
-    it('Checks checkbox', function() {
+    it('Checks checkbox', function () {
         element(by.xpath("(//DIV[@class='_md-container md-ink-ripple'])[2]")).click(); //click check box
     });
 
-    it('Creates a New template', function() {
-
+    it('Creates a New template', function () {
         CreateNewtemplate.SelectNewTemplate();
         CreateNewtemplate.validateSelectNewTemplate();
     });
 
-    it('Enters Template Information', function() {
-
+    it('Enters Template Information', function () {
         CreateNewtemplate.EnterTemplateInfo();
         CreateNewtemplate.validateEnterTemplateInfo();
     });
 
-    it('Save Finished Template', function() {
-
+    it('Save Finished Template', function () {
         CreateNewtemplate.SaveFinishedTemplate();
         CreateNewtemplate.validateSaveFinishedTemplate();
     });
 
-    // //2. document settings
+    //2. document settings
     // it('Click on +New and select ‘draft’', function () {
 
     //     element(by.xpath("(//A[@ui-sref='projects.workspace.documents'])[2]")).click(); //clicks homepage   
@@ -49,45 +47,24 @@ describe('Athennian', function() {
     //     Documents.validateClickOnNewAndSelectDraft();
     // });
 
-    // it('Share Documnet: Can view only', function () {
+    it('Share Document: Can view only', function () {
 
-    //     browser.sleep(3000);
-    //     ShareDocuments.CanViewOnly();
-    //     ShareDocuments.validateCanViewOnly();
-    // });
+        browser.sleep(3000);
+        ShareDocuments.CanViewOnly();
+        ShareDocuments.validateCanViewOnly();
+    });
 
-    // it('Share Documnet: Can edit', function () {
-    //     //element(by.xpath("//BUTTON[@aria-label='save']")).click();//click apply button
-    //     ShareDocuments.CanEdit();
-    //     ShareDocuments.validateCanEdit();
-    // });
+    it('Share Document: Can edit', function () {
+        //element(by.xpath("//BUTTON[@aria-label='save']")).click();//click apply button
+        ShareDocuments.CanEdit();
+        ShareDocuments.validateCanEdit();
+    });
 
-    // it('Share Documnet: All access', function () {
+    it('Share Document: All access', function () {
 
-    //     ShareDocuments.AllAccess();
-    //     ShareDocuments.validateAllAccess();
-    // });
-
-
-
-    // it('Click ‘Upload’', function () {
-
-    //     browser.sleep(3000);
-    //     Documents.ClickUpload();
-    //     Documents.validateClickUpload();
-    // });
-
-    // it('Click ‘choose a local file’', function () {
-
-    //     Documents.ClickChooseALocalfile();
-    //     Documents.validateClickChooseALocalfile();
-    // });
-
-    // it('Select file from OS menu', function () {
-
-    //     Documents.SelectFileFromOSMenu();
-    //     Documents.validateSelectFileFromOSMenu();
-    // });
+        ShareDocuments.AllAccess();
+        ShareDocuments.validateAllAccess();
+    });
 
     // it('Click on title area.  Type new title', function () {
 
@@ -207,20 +184,6 @@ describe('Athennian', function() {
     //     browser.sleep(7000);
     // });
 
-    // it('login to outlook web', function () {
-
-    //     browser.sleep(3000);
-    //     login.mailLogin();
-    //     login.validateMailLogin();
-    //     browser.sleep(6000);
-    // });
-
-    // it('Outlook open mail and', function () {
-    //     //Opens the Email.
-    //     browser.sleep(4000);
-    //     element(by.xpath("(//div[@autoid='_lv_i']//span[contains(.,'Document has been sent!')])[1]")).click();
-    // });
-
     // it('click paper login', function () { 
 
     //     browser.sleep(4000);
@@ -232,20 +195,6 @@ describe('Athennian', function() {
 
     //     browser.sleep(4000);
     //     signature.ClickSignSubmitSignature();
-    //     browser.sleep(5000);
-    // });
-
-    // it('login to outlook web', function () {
-
-    //     browser.sleep(5000);
-    //     browser.get(data.mailURL);
-    //     browser.sleep(6000);
-    // });
-
-    // it('Outlook open mail', function () {
-
-    //     browser.sleep(6000);
-    //     element(by.xpath("(//div[@autoid='_lv_i']//span[contains(.,'Document has been marked as comp')])[1]")).click();
     //     browser.sleep(5000);
     // });
 

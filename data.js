@@ -1,11 +1,8 @@
 module.exports = {
     url: 'https://secure.athennian.com/static/#/login',
     mailURL: 'https://secure.pqatesting.com/owa/#path=/mail',
-
+    title: 'Athennian',
     credentials: {
-        //"username": "autotest2@pqa.ca",
-        //"password": "Pq@1997",
-
         "username": "paperautotest1@outlook.com",
         "password": "Paperpassword1!",
 
@@ -13,11 +10,13 @@ module.exports = {
         "emailOnePass": "Paperpassword1!",
 
         "emailTwo": "paperautotest2@outlook.com",
-        "eamilTwoPass": "Paperpassword1!",
+        "emailTwoPass": "Paperpassword1!",
 
         "emailThree": "paperautotest3@outlook.com",
-        "emailFour": "paperautotest4@outlook.com",
+        "emailTwoPass": "Paperpassword1!",
 
+        "emailFour": "paperautotest4@outlook.com",
+        "emailTwoPass": "Paperpassword1!",
     },
     credentials2: {
         "username2": "autotest1@pqa.ca",
@@ -42,40 +41,16 @@ module.exports = {
     signature2: {
         "signedSignature2": "AutuTest1",
     },
-    testClickSignSubmitSignature: {
-        exp_title: 'Athennian'
-    },
-    testClickAction: {
-        exp_title: 'Athennian'
-    },
-    testClickSubmit: {
-        exp_title: 'Athennian'
-    },
-    testClickDropdownSend: {
-        exp_title: 'Athennian'
-    },
-    testCanViewOnly: {
-        exp_title: 'Athennian'
-    },
-    testCanEdit: {
-        exp_title: 'Athennian'
-    },
-    testAllAccessd: {
-        exp_title: 'Athennian'
-    },
-    //added
-    testSelectNewDraft: {
-        exp_title: 'Athennian'
-    },
-    //added
-    testDocumentSignatureCM: {
-        exp_title: 'Athennian'
-    },
-    testLogin: {
-        exp_title: 'Athennian'
+    signature3: {
+        "signedSignature3": "hdhdhd",
     },
     emailNotification: {
         exp_title: '//div[@class="toast-message" and contains(.,"You will receive an email notification once it has been accepted")]'
     },
-
+    templateTitle: {
+        title: 'Template-Title'
+    },
+    templateBody: {
+        input: 'Template test'
+    }
 }
