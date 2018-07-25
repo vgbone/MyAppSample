@@ -4,23 +4,23 @@ exports.config = {
     framework: 'jasmine',
     allScriptsTimeout: 99999,
     getPageTimeout: 30000,
-    multiCapabilities: [{
-            browserName: 'firefox',
-            count: 1,
-            shardTestFiles: false,
-            maxInstances: 2
-        },
-        // {
-        //     browserName: 'chrome',
-        //     count: 1,
-        //     shardTestFiles: true,
-        //     maxInstances: 2
-        // }
-    ],
+
+    // Capabilities to be passed to the webdriver instance.
+    capabilities: {
+        browserName: 'chrome',
+        count: 1,
+        shardTestFiles: true,
+        maxInstances: 2
+    },
+
+    // Spec patterns are relative to the configuration file location passed
+    // to protractor (in this example conf.js).
+    // They may include glob patterns.
     specs: ['Athennian-light-spec.js'],
-    // seleniumAddress: 'http://pqa-0352lt:4444/wd/hub/',
+
+    // The address of a running selenium server.
     seleniumAddress: 'http://localhost:4444/wd/hub/',
-    // seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
+
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         showColors: true,
@@ -29,7 +29,9 @@ exports.config = {
         isVerbose: true,
         print: function() {}
     },
+
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
+
     onPrepare: function() {
         require('./lib/waitReady');
 
