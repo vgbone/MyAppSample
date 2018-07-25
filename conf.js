@@ -5,11 +5,11 @@ exports.config = {
     allScriptsTimeout: 99999,
     getPageTimeout: 30000,
     multiCapabilities: [{
-        'browserName': 'firefox',
-        count: 1,
-        shardTestFiles: false,
-        maxInstances: 2
-    },
+            'browserName': 'firefox',
+            count: 1,
+            shardTestFiles: false,
+            maxInstances: 2
+        },
         //     //{
         //     'browserName': 'chrome',
         //     count: 1,
@@ -27,12 +27,12 @@ exports.config = {
         defaultTimeoutInterval: 120000,
         includeStackTrace: true,
         isVerbose: true,
-        print: function () { }
+        print: function() {}
     },
 
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
 
-    onPrepare: function () {
+    onPrepare: function() {
         require('./lib/waitReady');
         browser.manage().window().maximize();
         jasmine.getEnv().addReporter(new SpecReporter({

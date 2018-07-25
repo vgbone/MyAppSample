@@ -1,7 +1,5 @@
 # Athennian Automated Test Suite
 
-Table of contents
-=================
 
 <!--ts-->
    * [Getting Started](#getting-started)
@@ -42,6 +40,8 @@ Table of contents
    * [Built With](#built-with)
    * [Authors](#authors)
 <!--te-->
+=======
+One Paragraph of project description goes here
 
 ## Getting Started
 
