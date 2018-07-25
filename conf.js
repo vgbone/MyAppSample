@@ -20,6 +20,7 @@ exports.config = {
     specs: ['Athennian-deep-spec.js'],
     // seleniumAddress: 'http://pqa-0352lt:4444/wd/hub/',
     seleniumAddress: 'http://localhost:4444/wd/hub/',
+
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         showColors: true,
@@ -28,7 +29,9 @@ exports.config = {
         isVerbose: true,
         print: function () { }
     },
+
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
+
     onPrepare: function () {
         require('./lib/waitReady');
         browser.manage().window().maximize();

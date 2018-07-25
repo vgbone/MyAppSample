@@ -1,7 +1,7 @@
 {
     "name": "athennian",
     "version": "0.0.1",
-    "description": "Package for ContractClub automated solution",
+    "description": "Package for Athennian automated solution",
     "scripts": {
         "webdriver-update": "webdriver-manager update"
     },
