@@ -5,13 +5,13 @@ exports.config = {
     allScriptsTimeout: 99999,
     getPageTimeout: 30000,
     multiCapabilities: [{
-            'browserName': 'firefox',
+            browserName: 'firefox',
             count: 1,
             shardTestFiles: false,
             maxInstances: 2
         },
         // {
-        //     'browserName': 'chrome',
+        //     browserName: 'chrome',
         //     count: 1,
         //     shardTestFiles: true,
         //     maxInstances: 2
