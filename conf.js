@@ -9,6 +9,9 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         count: 1,
+        chromeOptions: {
+            args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+        },
         shardTestFiles: true,
         maxInstances: 2
     },
@@ -19,7 +22,8 @@ exports.config = {
     specs: ['Athennian-light-spec.js'],
 
     // The address of a running selenium server.
-    seleniumAddress: 'http://localhost:4444/wd/hub/',
+    // seleniumAddress: 'http://localhost:4444/wd/hub/',
+    seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
 
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {

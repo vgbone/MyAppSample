@@ -1,4 +1,7 @@
 #!/bin/bash
+
+ifconfig | perl -nle 's/dr:(\S+)/print $1/e'
+
 # Move to the Protractor test project folder
 cd $HOME
 
