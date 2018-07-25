@@ -1,4 +1,4 @@
-# Project Title
+# Athennian Automated Test Suite
 
 One Paragraph of project description goes here
 
