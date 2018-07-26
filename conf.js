@@ -6,15 +6,23 @@ exports.config = {
     getPageTimeout: 30000,
 
     // Capabilities to be passed to the webdriver instance.
-    capabilities: {
-        browserName: 'chrome',
-        count: 1,
-        chromeOptions: {
-            args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+    multiCapabilities: [{
+            browserName: 'firefox',
+            count: 1,
+            marionnette: true,
+            shardTestFiles: false,
+            maxInstances: 2,
         },
-        shardTestFiles: true,
-        maxInstances: 2
-    },
+        {
+            browserName: 'chrome',
+            count: 1,
+            chromeOptions: {
+                args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+            },
+            shardTestFiles: true,
+            maxInstances: 2
+        }
+    ],
 
     // Spec patterns are relative to the configuration file location passed
     // to protractor (in this example conf.js).
@@ -23,7 +31,8 @@ exports.config = {
 
     // The address of a running selenium server.
     // seleniumAddress: 'http://localhost:4444/wd/hub/',
-    seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
+    // seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
+    seleniumAddress: 'http://c5ea589c.ngrok.io/wd/hub',
 
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
