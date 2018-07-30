@@ -9,6 +9,9 @@ Table of contents
          * [Package](#package)
          * [NodeJS](#nodejs)
    * [System Startup](#system-startup)
+      * [Stand-Alone](#standalone)
+         * [Command Line](#commandline)
+         * [Docker Container](#dockercontainer)
       * [Zalenium](#zalenium)
          * [Zalenium Startup Command](#zalenium-startup-command)
          * [Zalenium Configuration Flags](#zalenium-configuration-flags)
@@ -81,6 +84,26 @@ npm install
 ```
 
 ## System Startup
+### Stand-Alone
+
+This is for running the scripts outside of Zalenium/Grid
+
+#### Command Line
+
+The standard protractor command to run the scripts on your local machine:
+
+```shell
+protractor conf.js
+```
+
+#### Docker Container
+
+Run in a local docker container. This requires that the root\scripts\run_e2e_tests.sh exists
+
+```shell
+docker run -it --rm --name protractor-runner -v ${pwd}:/protractor/project johnwwm/athennian conf.js
+```
+
 ### Zalenium
 
 [Docker Hub](https://hub.docker.com/r/dosel/zalenium/)
