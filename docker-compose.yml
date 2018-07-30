@@ -1,36 +1,10 @@
-# Usage:
-#   docker-compose up --force-recreate
-version: '2.1'
+version: '3'
 
 services:
-  zalenium:
-          image: "dosel/zalenium"
-          container_name: zalenium
-          hostname: zalenium
-          tty: true
-          volumes:
-              - C:/Users/sysadmin/seluser/videos:/home/seluser/videos
-              - C:/Users/sysadmin/seluser/run/docker.sock:/var/run/docker.sock
-              - C:/Users/sysadmin/seluser/docker:/usr/bin/docker
-          ports:
-              - 4444:4444
-          command: >
-            start --chromeContainers 1
-                  --firefoxContainers 1
-                  --maxDockerSeleniumContainers 8
-                  --screenWidth 800 --screenHeight 600
-                  --timeZone "Europe/Berlin"
-                  --videoRecordingEnabled true
-                  --sauceLabsEnabled false
-                  --browserStackEnabled false
-                  --testingBotEnabled false
-                  --startTunnel false
-          environment:
-            - HOST_UID
-            - HOST_GID
-            - SAUCE_USERNAME
-            - SAUCE_ACCESS_KEY
-            - BROWSER_STACK_USER
-            - BROWSER_STACK_KEY
-            - TESTINGBOT_KEY
-            - TESTINGBOT_SECRET
+  serveo:
+    image: taichunmin/serveo:latest
+    network_mode: "host"
+    tty: true
+    stdin_open: true
+    # see https://serveo.net/ for more options
+    command: "ssh -o ServerAliveInterval=60 -R 80:localhost:4444 -o \"StrictHostKeyChecking no\" serveo.net"
