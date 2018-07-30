@@ -1,0 +1,9 @@
+version: '3.2'
+
+services:
+  runner:
+    image: johnwwm/protractor-standalone
+    volumes:
+      - type: bind
+        source: ./
+        target: /protractor/project
