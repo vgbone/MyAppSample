@@ -2,62 +2,51 @@
 
 Table of contents
 =================
-
 <!--ts-->
-   * [Getting Started](#getting-started)
-      * [Prerequisites](#prerequisites)
-      * [package.json](#package)
-      * [Installation](#installation)
-      * [Configuration](#configuration)
-   * [Tests](#tests)
-      * [Draft Spec](#draft-spec)
-      * [Template Spec](#template-spec)
-   * [Running the tests](#running-the-tests)
-      * [webdriver-manager update](#webdriver-manager-update)
-      * [Standalone](#standalone)
-         * [webdriver-manager start](#webdriver-manager-start)
-         * [Chrome](#chrome)
-            * [Configuration](#chrome#configuration)
-            * [Run](#chrome#run)
-         * [Firefox](#firefox)
-            * [Configuration](#firefox#configuration)
-            * [Run](#firefox#run)
-      * [Zalenium](#zalenium)
-         * [Launch](#launch)
-         * [Dashboards](#dashboards)
-            * [Grid](#grid)
-            * [Live Preview](#live-preview)
-            * [Playback](#playback)
-         * [Run](#zalenium#run)
-   * [Docker](#docker)
-      * [Individual Container](#individual-container)
-         * [Dockerfile](#dockerfile)
-         * [docker-compose](#docker-compose)
-         * [CLI](#cli)
-      * [Zalenium Container](#zalenium-container)
-         * [Dockerfile](#dockerfile)
-         * [docker-compose](#docker-compose)
-         * [CLI](#cli)
-   * [BitBucket Pipeline](#bitbucket-pipeline)
    * [Built With](#built-with)
+   * [Getting Started](#getting-started)
+      * [Installation](#installation)
+         * [Package](#package)
+         * [NodeJS](#nodejs)
+   * [System Startup](#system-startup)
+      * [Zalenium](#zalenium)
+         * [Zalenium Startup Command](#zalenium-startup-command)
+         * [Zalenium Configuration Flags](#zalenium-configuration-flags)
+      * [Serveo](#serveo)
+         * [docker-compose](#docker-compose)
+         * [Serveo Startup Command](#zalenium-startup-command)
+   * [Tests](#tests)
+      * [Specs](#specs)
+         * [Spec1](#spec1)
+         * [Spec2](#spec2)
+      * [Test Configuration](#test-configuration)
+      * [Running Tests](#running-tests)
+         * [Zalenium Direct](#zalenium-direct)
+         * [Grid](#grid)
+         * [BitBucket Pipeline](#bitbucket-pipeline)
+   * [Results](#results)
+      * [Dashboards](#dashboards)
+      * [Live Preview](#live-preview)
    * [Authors](#authors)
+   * [Owner](#owner)
 <!--te-->
 
+## Built With
+
+* [NodeJS](https://nodejs.org/en/) - The backbone
+* [ProtractorJS](http://www.protractortest.org/#/) - The driving framework
+* [Jasmine](https://jasmine.github.io/) - The testing framework
+
+* [Docker](http://get.docker.com) - Containerization
+* [Serveo](https://serveo.net) - Web routing to Zalenium
+
 ## Getting Started
+### Installation
+#### Package
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+In your working directory, create a file named package.json
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-[Install NodeJS](https://nodejs.org/en/)
-
-#### package
-
-Create a file called package.json with the following contents:
-
-```
+```json
 {
     "name": "athennian",
     "version": "0.0.1",
@@ -84,26 +73,77 @@ Create a file called package.json with the following contents:
 }
 ```
 
-Run this command to install dependant packages in the folder with package.json:
+#### NodeJS
 
-```
-npm install
-```
-
-### Installation
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be:
-
-```
+```Shell
 cd <directory>/<of>/<project>
 npm install
 ```
 
-### Configuration
+## System Startup
+### Zalenium
 
+[Docker Hub](https://hub.docker.com/r/dosel/zalenium/)
+[GitHub](https://github.com/zalando/zalenium)
+[Documentation](https://opensource.zalando.com/zalenium/)
+
+#### Zalenium Startup Command
+
+```shell
+docker run --rm -ti --name zalenium -v //c/Users/sysadmin/Documents/GitHub/athenian-automation/dashboard:/home/seluser -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged johnwwm/zalenium start --timeZone "US/Mountain" --desiredContainers 4
 ```
+
+#### Zalenium Configuration Flags
+
+| Name        | Default           | Description  |
+| ----------------------------- |:-------------:| ----------------------------------------------------------------------------------:|
+| --desiredContainers	        | 2	            | Number of nodes/containers created on startup.                                     |
+| --maxDockerSeleniumContainers | 10	        | Maximum number of docker-selenium containers running at the same time.             |
+| --sauceLabsEnabled	        | false	        | Start Sauce Labs node or not.                                                      |
+| --browserStackEnabled	        | false	        | Start BrowserStack node or not.                                                    |
+| --testingbotEnabled	        | false	        | Start TestingBot node or not.                                                      |
+| --videoRecordingEnabled	    | true	        | Sets if video is recorded in every test.                                           |
+| --screenWidth	| 1920	| Sets the screen width. |
+| --screenHeight	1080	Sets the screen height. |
+| --timeZone	| "Europe/Berlin"	| Sets the time zone in the containers. |
+| --debugEnabled	| false	| Enables LogLevel. |
+| --logJson	| false	| Output logs in json format |
+| --logbackConfigFilePath	| logback.xml	| Path to a custom logback config file. |
+| --seleniumImageName	| "elgalu/selenium"	| Enables overriding of the Docker selenium image to use. |
+| --gridUser	| -	| Allows to specify a user to enable basic auth protection. --gridPassword must also be provided. |
+| --gridPassword	| -	| Allows to specify a password to enable basic auth protection. --gridUser must also be provided. |
+| --maxTestSessions	| 1	| Maximum amount of tests executed per container. |
+| --keepOnlyFailedTests	| false	| Keeps only failed tests on the dashboard (you need to send a cookie with the test result). |
+
+### Serveo
+#### docker-compose
+
+```shell
+version: '3'
+
+services:
+  serveo:
+    image: taichunmin/serveo:latest
+    network_mode: "host"
+    tty: true
+    stdin_open: true
+    # see https://serveo.net/ for more options
+    command: "ssh -o ServerAliveInterval=60 -R 80:localhost:4444 -o \"StrictHostKeyChecking no\" serveo.net"
+``` 
+
+#### Serveo Startup Command
+
+```shell
+docker-compose up
+```
+
+## Tests
+### Specs
+#### Spec1
+#### Spec2
+### Test Configuration
+
+```javascript
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 exports.config = {
@@ -115,6 +155,9 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         count: 1,
+        chromeOptions: {
+            args: ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+        },
         shardTestFiles: true,
         maxInstances: 2
     },
@@ -152,101 +195,23 @@ exports.config = {
     }
 };
 ```
-## Tests
 
-### Draft-Spec
+### Running Tests
+#### Zalenium Direct
 
-### Template-Spec
+In conf.js, update seleniumAddress:
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### webdriver-manager update
-
-To get the latest chromedriver and gecko driver, run the following command:
-
-```
-webdriver-manager update
+```javascript
+seleniumAddress: 'http://<Zelenium_Server>/wd/hub'
 ```
 
-### Standalone
+From the command line in the project working directory:
 
-#### webdriver-manager start
-
-webdriver-manager needs to be running for tests to run:
-
-```
-webdriver-manager start
-```
-
-#### Chrome
-
-Using the above configuration, the following command will run against the Chrome browser:
-
-```
+```shell
 protractor conf.js
 ```
 
-##### Configuration
-
-In conf.js, update the capabilities to:
-
-```
-    capabilities: {
-        browserName: 'chrome',
-        count: 1,
-        shardTestFiles: true,
-        maxInstances: 2
-    },
-```
-
-##### Run:
-
-```
-protractor conf.js
-```
-
-#### Firefox
-
-With Firefox, I have found that the install directory has to be included in the machines PATH variable:
-
-```
-PATH=C:\Program Files (x86)\Mozilla Firefox
-```
-
-##### Configuration
-
-In conf.js, update the capabilities to:
-
-```
-    capabilities: {
-        browserName: 'firefox',
-        count: 1,
-        shardTestFiles: true,
-        maxInstances: 2
-    },
-```
-
-##### Run:
-
-```
-protractor conf.js
-```
-
-### Zalenium
-
-Explain what these tests test and why
-
-#### Launch
-
-```
-docker run --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start --timeZone "US/Mountain" --desiredContainers 4
-```
-
-#### Dashboards
-
-##### Grid
+#### Grid
 
 ```
 http://localhost:4444/grid/console#
@@ -256,17 +221,10 @@ OR
 http://<Zalenium_Host>:4444/grid/console#
 ```
 
-##### Live Preview
-
-```
-http://localhost:4444/grid/admin/live
-
-OR
-
-http://<Zalenium_Host>:4444/grid/admin/live
-```
-
-##### Playback
+#### BitBucket Pipeline
+## Results
+### Dashboards
+#### Playback
 
 ```
 http://localhost:4444/dashboard/
@@ -276,67 +234,20 @@ OR
 http://<Zalenium_Host>:4444/dashboard/
 ```
 
-#### Run
+#### Live Preview
 
 ```
+http://localhost:4444/grid/admin/live
 
+OR
+
+http://<Zalenium_Host>:4444/grid/admin/live
 ```
-
-## Docker
-
-### Individual Container
-
-#### Dockerfile
-
-```
-Give an example
-```
-
-#### docker-compose
-
-```
-Give an example
-```
-
-#### CLI
-
-```
-docker run -it --rm --name protractor-runner -v C:/Users/sysadmin/Documents/GitHub/paper/athenian/final-docker-solution:/protractor/project johnwwm/athennian e2e.conf.js
-```
-
-### Zalenium Containers
-
-#### Dockerfile
-
-```
-Give an example
-```
-
-#### docker-compose
-
-```
-Give 
-```
-
-#### CLI
-
-```
-
-```
-
-## BitBucket Pipeline
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [NodeJS](https://nodejs.org/en/) - The backbone
-* [ProtractorJS](http://www.protractortest.org/#/) - The driving framework
-* [Jasmine](https://jasmine.github.io/) - The testing framework
-
-* [Docker](http://get.docker.com) - Containerization
-
 
 ## Authors
 
 * **John McLaughlin** - *Initial work* - [johnwwm](https://github.com/johnwwm)
+
+## Owner
+
+* **Athennian** - [athennian](https://bitbucket.org/get-paper/selenium)

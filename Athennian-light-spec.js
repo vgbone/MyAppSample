@@ -12,10 +12,10 @@ describe('Athennian - light spec', function() {
     describe('Login', function() {
         //1. login begin
         it('should login', function() {
-            // login.login();
-            // login.validatelogin();
-            loginPage.getLoginPage();
-            loginPage.login();
+            login.login();
+            login.validatelogin();
+            // loginPage.getLoginPage();
+            // loginPage.login();
         });
         //1. login end
     })

@@ -25,6 +25,7 @@ coverage/
 .vscode/
 .eslintrc.json
 variables.sh
+.npm/
 
 # Compiled less and sass files
 # ============================
@@ -60,3 +61,4 @@ build/
 # Atom.io Code editor
 # =========================
 .remote-sync.json
+.npm/_cacache/content-v2/sha1/01/0d/5858423a5f118979665f46486a95c6ee2bb6
