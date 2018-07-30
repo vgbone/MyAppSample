@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-MAINTAINER Hortonworks
+MAINTAINER PQATesting
 
 # Debian package configuration use the noninteractive frontend: It never interacts with the user at all, and makes the default answers be used for all questions.
 # http://manpages.ubuntu.com/manpages/wily/man7/debconf.7.html
@@ -45,7 +45,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN apt-get update -qqy \
     && apt-get -qqy install \
     xvfb \
-    firefox=45.0.2+build1-0ubuntu1 \
+    firefox=61.0.1+build1-0ubuntu0.16.04.1 \
     google-chrome-stable \
     default-jre
 
@@ -78,7 +78,8 @@ RUN npm install --unsafe-perm -g \
     jasmine-spec-reporter \
     protractor-jasmine2-html-reporter \
     jasmine-allure-reporter \
-    protractor-console
+    protractor-console \
+    chromedriver
 
 # Set the working directory
 WORKDIR /protractor/

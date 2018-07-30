@@ -6,13 +6,14 @@ exports.config = {
     getPageTimeout: 30000,
 
     // Capabilities to be passed to the webdriver instance.
-    multiCapabilities: [{
-            browserName: 'firefox',
-            count: 1,
-            marionnette: true,
-            shardTestFiles: false,
-            maxInstances: 2,
-        },
+    multiCapabilities: [
+        // {
+        //     browserName: 'firefox',
+        //     count: 1,
+        //     marionnette: true,
+        //     shardTestFiles: false,
+        //     maxInstances: 2,
+        // },
         {
             browserName: 'chrome',
             count: 1,
@@ -30,9 +31,10 @@ exports.config = {
     specs: ['Athennian-light-spec.js'],
 
     // The address of a running selenium server.
+    seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
     // seleniumAddress: 'http://localhost:4444/wd/hub/',
     // seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
-    seleniumAddress: 'http://c5ea589c.ngrok.io/wd/hub',
+    // seleniumAddress: 'http://c5ea589c.ngrok.io/wd/hub',
 
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
