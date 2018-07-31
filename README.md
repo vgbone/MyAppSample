@@ -376,6 +376,12 @@ docker-compose run runner conf.js
 --seleniumAddress=http://<server_location>/wd/hub
 ```
 
+**Example** 
+
+```shell
+docker-compose run runner conf.js --seleniumAddress=http://127.0.0.1/wd/hub
+```
+
 ## Results
 ### Dashboards
 #### Playback
