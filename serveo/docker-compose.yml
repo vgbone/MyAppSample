@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  serveo:
+    image: taichunmin/serveo:latest
+    network_mode: "host"
+    tty: true
+    stdin_open: true
+    # see https://serveo.net/ for more options
+    command: "ssh -o ServerAliveInterval=60 -R 80:localhost:4444 -o \"StrictHostKeyChecking no\" serveo.net"
