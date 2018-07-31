@@ -28,6 +28,10 @@ Table of contents
          * [Zalenium Direct](#zalenium-direct)
          * [Grid](#grid)
          * [BitBucket Pipeline](#bitbucket-pipeline)
+         * [Standalone Docker](#standalone-docker)
+            * [Compose](#compose)
+            * [Command](#command)
+            * [Useful Args](#useful-args)
    * [Results](#results)
       * [Dashboards](#dashboards)
       * [Live Preview](#live-preview)
@@ -239,7 +243,7 @@ docker run --rm -ti --name zalenium -v //c/Users/sysadmin/Documents/GitHub/athen
 ### Serveo
 #### docker-compose
 
-```shell
+```yml
 version: '3'
 
 services:
@@ -343,6 +347,35 @@ http://<Zalenium_Host>:4444/grid/console#
 ```
 
 #### BitBucket Pipeline
+
+#### Standalone Docker
+
+##### Compose
+
+```yml
+version: '3.2'
+
+services:
+  runner:
+    image: johnwwm/protractor-standalone
+    volumes:
+      - type: bind
+        source: ./
+        target: /protractor/project
+```
+
+#### Command
+
+```shell
+docker-compose run runner conf.js
+```
+
+##### Useful Args
+
+```shell
+--seleniumAddress=http://<server_location>/wd/hub
+```
+
 ## Results
 ### Dashboards
 #### Playback
