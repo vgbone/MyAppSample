@@ -72,31 +72,31 @@ gulp.task('stop', function() {
 //     }
 // })
 
-// // Runs all API tests 
-// gulp.task('frontTests', function() {
-//     return gulp.src(['./frontend.test.js'])
-//         .pipe(protractor({
-//             configFile: "conf.js",
-//             // args: ['--baseUrl', 'http://127.0.0.1:4444'] 
-//             // reporter: 'mocha-multi', 
-//             // reporterOptions: reporterOptions 
-//         }))
-//         // .on('error', gutil.log); 
+// Runs all API tests 
+gulp.task('frontTests', function() {
+    return gulp.src(['./frontend.test.js'])
+        .pipe(protractor({
+            configFile: "conf.js",
+            // args: ['--baseUrl', 'http://127.0.0.1:4444'] 
+            // reporter: 'mocha-multi', 
+            // reporterOptions: reporterOptions 
+        }))
+        // .on('error', gutil.log); 
 
 
-//     // .on('error', process.exit.bind(process, 1)); 
+    // .on('error', process.exit.bind(process, 1)); 
 
 
-//     // return gulp.src(['conf.js'], { 
-//     //         read: false 
-//     //     }) 
-//     //     .pipe(mocha({ 
-//     //         reporter: 'mocha-multi', 
-//     //         reporterOptions: reporterOptions 
-//     //     })) 
-//     //     // .on('error', gutil.log); 
-//     .on('error', swallowError);
-// })
+    // return gulp.src(['conf.js'], { 
+    //         read: false 
+    //     }) 
+    //     .pipe(mocha({ 
+    //         reporter: 'mocha-multi', 
+    //         reporterOptions: reporterOptions 
+    //     })) 
+    //     // .on('error', gutil.log); 
+    .on('error', swallowError);
+})
 
 // gulp.task('protractor-install', function(done) {
 //     child_process.spawn(getProtractorBinary('webdriver-manager'), ['update'], {
