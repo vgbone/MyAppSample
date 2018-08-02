@@ -31,7 +31,8 @@ exports.config = {
     specs: ['Athennian-light-spec.js'],
 
     // The address of a running selenium server.
-    seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
+    seleniumAddress: 'https://mensa.serveo.net/wd/hub/',
+    // seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
     // seleniumAddress: 'http://localhost:4444/wd/hub/',
     // seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
     // seleniumAddress: 'http://c5ea589c.ngrok.io/wd/hub',

@@ -16,6 +16,7 @@ Table of contents
       * [Zalenium](#zalenium)
          * [Zalenium Startup Command](#zalenium-startup-command)
          * [Zalenium Configuration Flags](#zalenium-configuration-flags)
+         * [Dashboards](#dashboards)
       * [Serveo](#serveo)
          * [docker-compose](#docker-compose)
          * [Serveo Startup Command](#zalenium-startup-command)
@@ -215,7 +216,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 #### Zalenium Startup Command
 
 ```shell
-docker run --rm -ti --name zalenium -v //c/Users/sysadmin/Documents/GitHub/athenian-automation/dashboard:/home/seluser -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged johnwwm/zalenium start --timeZone "US/Mountain" --desiredContainers 4
+docker run --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged johnwwm/zalenium start --timeZone "US/Mountain" --desiredContainers 4
 ```
 
 #### Zalenium Configuration Flags
@@ -239,6 +240,11 @@ docker run --rm -ti --name zalenium -v //c/Users/sysadmin/Documents/GitHub/athen
 | --gridPassword	| -	| Allows to specify a password to enable basic auth protection. --gridUser must also be provided. |
 | --maxTestSessions	| 1	| Maximum amount of tests executed per container. |
 | --keepOnlyFailedTests	| false	| Keeps only failed tests on the dashboard (you need to send a cookie with the test result). |
+
+#### Dashboards
+[Grid](https://mensa.serveo.net/grid/console)
+[VNC](https://mensa.serveo.net/grid/admin/live)
+[Playback](https://mensa.serveo.net/dashboard)
 
 ### Serveo
 #### docker-compose
