@@ -4,7 +4,8 @@
     "description": "Package for Athennian automated solution",
     "scripts": {
         "webdriver-update": "webdriver-manager update",
-        "start": "ng serve &"
+        "start": "ng serve &",
+        "test": "protractor conf.js"
     },
     "dependencies": {
         "assert": "1.4.1",

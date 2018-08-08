@@ -38,46 +38,46 @@ gulp.task('stop', function() {
 //  FRONT END TESTING 
 ////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-// gulp.task('fet', function() {
-//     runSequence('setFrontTestFlags', 'protractor-install', 'frontTests', 'stop');
-// })
+gulp.task('fet', function() {
+    runSequence('setFrontTestFlags', 'protractor-install', 'frontTests', 'stop');
+})
 
-// //Sets testing Suite flags 
-// gulp.task('setFrontTestFlags', function() {
-//     //setting env vars to false to prevent test contamination 
-//     process.env.ALL_TESTS = "false";
-//     process.env.LOGIN_TEST = "false";
-//     process.env.EDITOR_TESTS = "false";
-//     process.env.TEMPLATE_TESTS = "false";
-//     process.env.DOCUMENT_TESTS = "false";
+//Sets testing Suite flags 
+gulp.task('setFrontTestFlags', function() {
+    //setting env vars to false to prevent test contamination 
+    process.env.ALL_TESTS = "false";
+    process.env.LOGIN_TEST = "false";
+    process.env.EDITOR_TESTS = "false";
+    process.env.TEMPLATE_TESTS = "false";
+    process.env.DOCUMENT_TESTS = "false";
 
-//     switch (argv.test) {
-//         case 'all':
-//             process.env.ALL_TESTS = "true";
-//             break;
-//         case 'login':
-//             process.env.LOGIN_TEST = "true";
-//             break;
-//         case 'editor':
-//             process.env.EDITOR_TESTS = "true";
-//             break;
-//         case 'template':
-//             process.env.TEMPLATE_TESTS = "true";
-//             break;
-//         case 'document':
-//             process.env.DOCUMENT_TESTS = "true";
-//             break;
-//         default:
-//             process.env.ALL_TESTS = "true";
-//     }
-// })
+    switch (argv.test) {
+        case 'all':
+            process.env.ALL_TESTS = "true";
+            break;
+        case 'login':
+            process.env.LOGIN_TEST = "true";
+            break;
+        case 'editor':
+            process.env.EDITOR_TESTS = "true";
+            break;
+        case 'template':
+            process.env.TEMPLATE_TESTS = "true";
+            break;
+        case 'document':
+            process.env.DOCUMENT_TESTS = "true";
+            break;
+        default:
+            process.env.ALL_TESTS = "true";
+    }
+})
 
 // Runs all API tests 
 gulp.task('frontTests', function() {
     return gulp.src(['./frontend.test.js'])
         .pipe(protractor({
             configFile: "conf.js",
-            // args: ['--baseUrl', 'http://127.0.0.1:4444'] 
+            // args: ['--baseUrl', 'http://127.0.0.1:4444']
             // reporter: 'mocha-multi', 
             // reporterOptions: reporterOptions 
         }))
@@ -98,18 +98,18 @@ gulp.task('frontTests', function() {
     .on('error', swallowError);
 })
 
-// gulp.task('protractor-install', function(done) {
-//     child_process.spawn(getProtractorBinary('webdriver-manager'), ['update'], {
-//         stdio: 'inherit'
-//     }).once('close', done);
-// });
+gulp.task('protractor-install', function(done) {
+    child_process.spawn(getProtractorBinary('webdriver-manager'), ['update'], {
+        stdio: 'inherit'
+    }).once('close', done);
+});
 
-// function getProtractorBinary(binaryName) {
-//     var winExt = /^win/.test(process.platform) ? '.cmd' : '';
-//     var pkgPath = require.resolve('protractor');
-//     var protractorDir = path.resolve(path.join(path.dirname(pkgPath), '..', 'bin'));
-//     return path.join(protractorDir, '/' + binaryName + winExt);
-// }
+function getProtractorBinary(binaryName) {
+    var winExt = /^win/.test(process.platform) ? '.cmd' : '';
+    var pkgPath = require.resolve('protractor');
+    var protractorDir = path.resolve(path.join(path.dirname(pkgPath), '..', 'bin'));
+    return path.join(protractorDir, '/' + binaryName + winExt);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////// 
 //  END FRONT END TESTING 

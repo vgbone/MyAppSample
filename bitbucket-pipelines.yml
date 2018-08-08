@@ -4,29 +4,54 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: 
-  name: docker:stable
+  name: paperapp/selenium-testing
   username: paperapp
   password: $DOCKER_PW
   email: accounts@get-paper.com
 
-options:
-  docker: true
-
 pipelines:
   default:
     - step:
-      - echo "Tmp"
+        name: Default Pipeline
+        caches:
+          - node
+        script: 
+          - declare -x TWILIO_SID=$TWILIO_SID;
+          - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+          - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+          - declare -x OPS_CONTACT=$OPS_CONTACT;
+          - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+          - npm install
+          - webdriver-manager update
+          - webdriver-manager start & sleep 5; gulp
   
-  branches:
-    pqa-july-2018:
+  pqa-july-2018:
+    - step:
+        name: Default Pipeline
+        caches:
+          - node
+        script: 
+          - declare -x TWILIO_SID=$TWILIO_SID;
+          - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+          - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+          - declare -x OPS_CONTACT=$OPS_CONTACT;
+          - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+          - npm install
+          - webdriver-manager update
+          - webdriver-manager start & sleep 5; gulp
+
+  custom:
+    uptime check:
       - step:
+          name: Master Pipeline
           caches:
             - node
-            - pip
-            - docker
           script: 
-            - apk add --no-cache py-pip bash 
-            - pip install --no-cache-dir docker-compose
-            - docker-compose -v
-            - docker-compose run runner conf.js
-            
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
