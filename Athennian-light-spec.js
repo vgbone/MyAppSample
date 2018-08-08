@@ -1,5 +1,5 @@
 var Signature = require('./lib/Signature')
-var login = require('./lib/login')
+var login = require('./lib/Login')
 var Documents = require('./lib/Documents')
 var DocumentSignatureCaseManager = require('./lib/DocumentSignatureCaseManager')
 

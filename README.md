@@ -16,9 +16,7 @@ Table of contents
       * [Zalenium](#zalenium)
          * [Zalenium Startup Command](#zalenium-startup-command)
          * [Zalenium Configuration Flags](#zalenium-configuration-flags)
-      * [Serveo](#serveo)
-         * [docker-compose](#docker-compose)
-         * [Serveo Startup Command](#zalenium-startup-command)
+         * [Dashboards](#dashboards)
    * [Tests](#tests)
       * [Specs](#specs)
          * [Spec1](#spec1)
@@ -28,10 +26,8 @@ Table of contents
          * [Zalenium Direct](#zalenium-direct)
          * [Grid](#grid)
          * [BitBucket Pipeline](#bitbucket-pipeline)
-         * [Standalone Docker](#standalone-docker)
-            * [Compose](#compose)
-            * [Command](#command)
-            * [Useful Args](#useful-args)
+            * [bitbucket-pipelines.yml](#bitbucket-pipelines)
+            * [gulpfile.js](#gulpfile)
    * [Results](#results)
       * [Dashboards](#dashboards)
       * [Live Preview](#live-preview)
@@ -46,7 +42,6 @@ Table of contents
 * [Jasmine](https://jasmine.github.io/) - The testing framework
 
 * [Docker](http://get.docker.com) - Containerization
-* [Serveo](https://serveo.net) - Web routing to Zalenium
 
 ## Getting Started
 ### Installation
@@ -209,13 +204,15 @@ ENTRYPOINT ["/entrypoint.sh"]
 ### Zalenium
 
 [Docker Hub](https://hub.docker.com/r/dosel/zalenium/)
+
 [GitHub](https://github.com/zalando/zalenium)
+
 [Documentation](https://opensource.zalando.com/zalenium/)
 
 #### Zalenium Startup Command
 
 ```shell
-docker run --rm -ti --name zalenium -v //c/Users/sysadmin/Documents/GitHub/athenian-automation/dashboard:/home/seluser -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged johnwwm/zalenium start --timeZone "US/Mountain" --desiredContainers 4
+docker run --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged johnwwm/zalenium start --timeZone "US/Mountain" --desiredContainers 4
 ```
 
 #### Zalenium Configuration Flags
@@ -240,27 +237,10 @@ docker run --rm -ti --name zalenium -v //c/Users/sysadmin/Documents/GitHub/athen
 | --maxTestSessions	| 1	| Maximum amount of tests executed per container. |
 | --keepOnlyFailedTests	| false	| Keeps only failed tests on the dashboard (you need to send a cookie with the test result). |
 
-### Serveo
-#### docker-compose
-
-```yml
-version: '3'
-
-services:
-  serveo:
-    image: taichunmin/serveo:latest
-    network_mode: "host"
-    tty: true
-    stdin_open: true
-    # see https://serveo.net/ for more options
-    command: "ssh -o ServerAliveInterval=60 -R 80:localhost:4444 -o \"StrictHostKeyChecking no\" serveo.net"
-``` 
-
-#### Serveo Startup Command
-
-```shell
-docker-compose up
-```
+#### Dashboards
+[Grid](http://199.116.235.89:4444/grid/console)
+[VNC](http://199.116.235.89:4444/grid/admin/live)
+[Playback](http://199.116.235.89:4444/dashboard)
 
 ## Tests
 ### Specs
@@ -348,7 +328,223 @@ http://<Zalenium_Host>:4444/grid/console#
 
 #### BitBucket Pipeline
 
-#### Standalone Docker
+##### bitbucket-pipelines
+
+```yml
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: 
+  name: paperapp/selenium-testing
+  username: paperapp
+  password: $DOCKER_PW
+  email: accounts@get-paper.com
+
+pipelines:
+  default:
+    - step:
+        name: Default Pipeline
+        caches:
+          - node
+        script: 
+          - declare -x TWILIO_SID=$TWILIO_SID;
+          - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+          - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+          - declare -x OPS_CONTACT=$OPS_CONTACT;
+          - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+          - npm install
+          - webdriver-manager update
+          - webdriver-manager start & sleep 5; gulp
+  
+  pqa-july-2018:
+    - step:
+        name: Default Pipeline
+        caches:
+          - node
+        script: 
+          - declare -x TWILIO_SID=$TWILIO_SID;
+          - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+          - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+          - declare -x OPS_CONTACT=$OPS_CONTACT;
+          - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+          - npm install
+          - webdriver-manager update
+          - webdriver-manager start & sleep 5; gulp
+
+  custom:
+    uptime check:
+      - step:
+          name: Master Pipeline
+          caches:
+            - node
+          script: 
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+```
+
+##### gulpfile
+
+```JavaScript
+// Copyright (c) 2017 - Paper Interactive Inc. 
+// Any unauthorized distribution or transfer 
+// of this work is strictly prohibited. 
+// All Rights Reserved. 
+// 
+
+var gulp = require('gulp');
+var mocha = require('gulp-mocha');
+var gutil = require('gulp-util');
+var runSequence = require('run-sequence'); // Run tasks sequentially 
+var protractor = require("gulp-protractor").protractor;
+var argv = require('yargs').argv;
+var child_process = require('child_process');
+var path = require('path');
+var twilio = require('twilio');
+
+var reporterOptions = {
+
+    'mocha-junit-reporter': {
+        mochaFile: './test-results.xml',
+        stdout: "/tmp/mocha-multi.Progress.out",
+        options: {
+            verbose: true
+        }
+    },
+    spec: "-"
+};
+
+// define the default task 
+gulp.task('default', ['fet']);
+
+gulp.task('stop', function() {
+    process.env.TEST_IN_PROGRESS = "false";
+    process.exit();
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//  FRONT END TESTING 
+////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+gulp.task('fet', function() {
+    runSequence('setFrontTestFlags', 'protractor-install', 'frontTests', 'stop');
+})
+
+//Sets testing Suite flags 
+gulp.task('setFrontTestFlags', function() {
+    //setting env vars to false to prevent test contamination 
+    process.env.ALL_TESTS = "false";
+    process.env.LOGIN_TEST = "false";
+    process.env.EDITOR_TESTS = "false";
+    process.env.TEMPLATE_TESTS = "false";
+    process.env.DOCUMENT_TESTS = "false";
+
+    switch (argv.test) {
+        case 'all':
+            process.env.ALL_TESTS = "true";
+            break;
+        case 'login':
+            process.env.LOGIN_TEST = "true";
+            break;
+        case 'editor':
+            process.env.EDITOR_TESTS = "true";
+            break;
+        case 'template':
+            process.env.TEMPLATE_TESTS = "true";
+            break;
+        case 'document':
+            process.env.DOCUMENT_TESTS = "true";
+            break;
+        default:
+            process.env.ALL_TESTS = "true";
+    }
+})
+
+// Runs all API tests 
+gulp.task('frontTests', function() {
+    return gulp.src(['./frontend.test.js'])
+        .pipe(protractor({
+            configFile: "conf.js",
+            // args: ['--baseUrl', 'http://127.0.0.1:4444']
+            // reporter: 'mocha-multi', 
+            // reporterOptions: reporterOptions 
+        }))
+        // .on('error', gutil.log); 
+
+
+    // .on('error', process.exit.bind(process, 1)); 
+
+
+    // return gulp.src(['conf.js'], { 
+    //         read: false 
+    //     }) 
+    //     .pipe(mocha({ 
+    //         reporter: 'mocha-multi', 
+    //         reporterOptions: reporterOptions 
+    //     })) 
+    //     // .on('error', gutil.log); 
+    .on('error', swallowError);
+})
+
+gulp.task('protractor-install', function(done) {
+    child_process.spawn(getProtractorBinary('webdriver-manager'), ['update'], {
+        stdio: 'inherit'
+    }).once('close', done);
+});
+
+function getProtractorBinary(binaryName) {
+    var winExt = /^win/.test(process.platform) ? '.cmd' : '';
+    var pkgPath = require.resolve('protractor');
+    var protractorDir = path.resolve(path.join(path.dirname(pkgPath), '..', 'bin'));
+    return path.join(protractorDir, '/' + binaryName + winExt);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//  END FRONT END TESTING 
+////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//  SMS NOTIFICATION ERROR HANDLING
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//This will prevent hanging builds and allow for faster failure/feedback 
+function swallowError(error) {
+    // If you want details of the error in the console 
+    console.log("THE ERROR: ", error.toString())
+
+    var accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
+    var authToken = process.env.TWILIO_TOKEN; // Your Auth Token from www.twilio.com/console
+    var twilioNumber = process.env.TWILIO_NUMBER;
+    var opsContact = process.env.OPS_CONTACT;
+    var opsContact2 = process.env.OPS_CONTACT2;
+    var client = new twilio(accountSid, authToken);
+
+    client.messages.create({
+            body: "It's Paige Turner - something is wrong with the system: " + error.toString(),
+            to: opsContact, // Text this number
+            from: twilioNumber // From a valid Twilio number
+        })
+        .then(message => {
+            console.log(message.sid)
+            client.messages.create({
+                    body: "It's Paige Turner - something is wrong with the system: " + error.toString(),
+                    to: opsContact2, // Text this number
+                    from: twilioNumber // From a valid Twilio number
+                })
+                .then(message => {
+                    console.log(message.sid)
+                    process.exit.bind(process, 1)
+                });
+        });
+}
+```
 
 ##### Compose
 

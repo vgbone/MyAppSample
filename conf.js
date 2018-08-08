@@ -6,14 +6,13 @@ exports.config = {
     getPageTimeout: 30000,
 
     // Capabilities to be passed to the webdriver instance.
-    multiCapabilities: [
-        // {
-        //     browserName: 'firefox',
-        //     count: 1,
-        //     marionnette: true,
-        //     shardTestFiles: false,
-        //     maxInstances: 2,
-        // },
+    multiCapabilities: [{
+            browserName: 'firefox',
+            count: 1,
+            marionnette: true,
+            shardTestFiles: false,
+            maxInstances: 2,
+        },
         {
             browserName: 'chrome',
             count: 1,
@@ -31,7 +30,8 @@ exports.config = {
     specs: ['Athennian-light-spec.js'],
 
     // The address of a running selenium server.
-    seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
+    seleniumAddress: 'http://199.116.235.89:4444/wd/hub/',
+    // seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
     // seleniumAddress: 'http://localhost:4444/wd/hub/',
     // seleniumAddress: 'http://172.17.0.2:4444/wd/hub',
     // seleniumAddress: 'http://c5ea589c.ngrok.io/wd/hub',
@@ -39,6 +39,7 @@ exports.config = {
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         showColors: true,
+        silent: true,
         defaultTimeoutInterval: 120000,
         includeStackTrace: true,
         isVerbose: true,
@@ -48,15 +49,33 @@ exports.config = {
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
 
     onPrepare: function() {
-        require('./lib/waitReady');
+        require('./lib/WaitReady');
 
         browser.manage().window().maximize();
 
         jasmine.getEnv().addReporter(new SpecReporter({
-            displayFailuresSummary: true,
-            displayFailuredSpec: true,
-            displaySuiteNumber: true,
-            displaySpecDuration: true
+            spec: {
+                displayDuration: false,
+                displayErrorMessages: true,
+                displayFailed: true,
+                displayPending: false,
+                displayStacktrace: false,
+                displaySuccessful: true,
+            },
+            colors: {
+                enabled: true,
+                failed: "red",
+                pending: "yellow",
+                successful: "green",
+            },
+            summary: {
+                displayDuration: true,
+                displayErrorMessages: true,
+                displayFailed: true,
+                displayPending: true,
+                displayStacktrace: false,
+                displaySuccessful: true,
+            },
         }));
     }
 };
