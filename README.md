@@ -1,5 +1,6 @@
 # Athennian Automated Test Suite
 
+<<<<<<< HEAD
 Table of contents
 =================
 <!--ts-->
@@ -34,6 +35,50 @@ Table of contents
    * [Authors](#authors)
    * [Owner](#owner)
 <!--te-->
+=======
+
+<!--ts-->
+   * [Getting Started](#getting-started)
+      * [Prerequisites](#prerequisites)
+      * [package.json](#package)
+      * [Installation](#installation)
+      * [Configuration](#configuration)
+   * [Tests](#tests)
+      * [Draft Spec](#draft-spec)
+      * [Template Spec](#template-spec)
+   * [Running the tests](#running-the-tests)
+      * [webdriver-manager update](#webdriver-manager-update)
+      * [Standalone](#standalone)
+         * [webdriver-manager start](#webdriver-manager-start)
+         * [Chrome](#chrome)
+            * [Configuration](#chrome#configuration)
+            * [Run](#chrome#run)
+         * [Firefox](#firefox)
+            * [Configuration](#firefox#configuration)
+            * [Run](#firefox#run)
+      * [Zalenium](#zalenium)
+         * [Launch](#launch)
+         * [Dashboards](#dashboards)
+            * [Grid](#grid)
+            * [Live Preview](#live-preview)
+            * [Playback](#playback)
+         * [Run](#zalenium#run)
+   * [Docker](#docker)
+      * [Individual Container](#individual-container)
+         * [Dockerfile](#dockerfile)
+         * [docker-compose](#docker-compose)
+         * [CLI](#cli)
+      * [Zalenium Container](#zalenium-container)
+         * [Dockerfile](#dockerfile)
+         * [docker-compose](#docker-compose)
+         * [CLI](#cli)
+   * [BitBucket Pipeline](#bitbucket-pipeline)
+   * [Built With](#built-with)
+   * [Authors](#authors)
+<!--te-->
+=======
+One Paragraph of project description goes here
+>>>>>>> pqa-july-2018
 
 ## Built With
 
