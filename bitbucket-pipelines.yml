@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: 
+image:
   name: paperapp/selenium-testing
   username: paperapp
   password: $DOCKER_PW
@@ -15,43 +15,237 @@ pipelines:
         name: Default Pipeline
         caches:
           - node
-        script: 
+        script:
           - declare -x TWILIO_SID=$TWILIO_SID;
           - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
           - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
           - declare -x OPS_CONTACT=$OPS_CONTACT;
           - declare -x OPS_CONTACT2=$OPS_CONTACT2;
-          - npm install
-          - webdriver-manager update
-          - webdriver-manager start & sleep 5; gulp
-  
-  pqa-july-2018:
-    - step:
-        name: Default Pipeline
-        caches:
-          - node
-        script: 
-          - declare -x TWILIO_SID=$TWILIO_SID;
-          - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
-          - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
-          - declare -x OPS_CONTACT=$OPS_CONTACT;
-          - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+          - declare -x URL="http://stage.athennian.com"
           - npm install
           - webdriver-manager update
           - webdriver-manager start & sleep 5; gulp
 
   custom:
-    uptime check:
+    pqa-july-2018:
       - step:
-          name: Master Pipeline
+          name: Test Pipeline
           caches:
             - node
-          script: 
+          script:
             - declare -x TWILIO_SID=$TWILIO_SID;
             - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
             - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
             - declare -x OPS_CONTACT=$OPS_CONTACT;
             - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://stage.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    stage:
+      - step:
+          name: Stage Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://stage.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+    secure:
+      - step:
+          name: Secure Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://secure.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    labs:
+      - step:
+          name: Labs Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://labs.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    example:
+      - step:
+          name: Example Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://example.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    minit:
+      - step:
+          name: Minit Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://minit.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    shane:
+      - step:
+          name: Shane's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://shane.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    mark:
+      - step:
+          name: Mark's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://mark.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    andrew:
+      - step:
+          name: Andrew's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://andrew.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    jeremy:
+      - step:
+          name: Jeremy's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://jeremy.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    spencer:
+      - step:
+          name: Spencer's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://spencer.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    elvin:
+      - step:
+          name: Elvin's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://evlin.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+
+    christilyn:
+      - step:
+          name: Christilyn's local dev Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL="http://christilyn.athennian.com"
+            - npm install
+            - webdriver-manager update
+            - webdriver-manager start & sleep 5; gulp
+          
+    uptime check:
+      - step:
+          name: Master Pipeline
+          caches:
+            - node
+          script:
+            - declare -x TWILIO_SID=$TWILIO_SID;
+            - declare -x TWILIO_TOKEN=$TWILIO_TOKEN;
+            - declare -x TWILIO_NUMBER=$TWILIO_NUMBER;
+            - declare -x OPS_CONTACT=$OPS_CONTACT;
+            - declare -x OPS_CONTACT2=$OPS_CONTACT2;
+            - declare -x URL=""
             - npm install
             - webdriver-manager update
             - webdriver-manager start & sleep 5; gulp
