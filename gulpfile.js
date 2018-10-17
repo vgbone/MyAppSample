@@ -13,6 +13,13 @@ var argv = require('yargs').argv;
 var child_process = require('child_process');
 var path = require('path');
 var twilio = require('twilio');
+var log = require('fancy-log');
+
+// fetch command line arguments
+environment = process.env.URL
+log(environment)
+
+// log(process.env.URL)
 
 var reporterOptions = {
 
@@ -77,25 +84,11 @@ gulp.task('frontTests', function() {
     return gulp.src(['./frontend.test.js'])
         .pipe(protractor({
             configFile: "conf.js",
-            // args: ['--baseUrl', 'http://127.0.0.1:4444']
-            // reporter: 'mocha-multi', 
-            // reporterOptions: reporterOptions 
+            args: ['--baseUrl', environment]
+                // reporter: 'mocha-multi', 
+                // reporterOptions: reporterOptions 
         }))
-        // .on('error', gutil.log); 
-
-
-    // .on('error', process.exit.bind(process, 1)); 
-
-
-    // return gulp.src(['conf.js'], { 
-    //         read: false 
-    //     }) 
-    //     .pipe(mocha({ 
-    //         reporter: 'mocha-multi', 
-    //         reporterOptions: reporterOptions 
-    //     })) 
-    //     // .on('error', gutil.log); 
-    .on('error', swallowError);
+        .on('error', swallowError);
 })
 
 gulp.task('protractor-install', function(done) {

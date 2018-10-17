@@ -1,5 +1,5 @@
 module.exports = {
-    url: 'https://secure.athennian.com/static/#/login',
+    url: process.env.URL,
     mailURL: 'https://secure.pqatesting.com/owa/#path=/mail',
 
     credentials: {
