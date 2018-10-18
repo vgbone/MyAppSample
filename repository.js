@@ -80,6 +80,18 @@ module.exports = {
             canvas: {
                 xpath: '//div/canvas'
             },
+            elementsIcon: {
+                xpath: '//span[contains(.,"Elements")]'
+            },
+            fieldButton: {
+                className: 'side-bar-heading'
+            },
+            newFieldButton: {
+                css: '[ng-click="insertVariableField()"]'
+            },
+            variable1Button: {
+                css: "input[placeholder='Enter value']"
+            },
         },
         textfields: {
             title: {
@@ -163,4 +175,4 @@ module.exports = {
             },
         }
     },
-}  
+}

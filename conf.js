@@ -28,8 +28,8 @@ exports.config = {
     // Spec patterns are relative to the configuration file location passed
     // to protractor (in this example conf.js).
     // They may include glob patterns.
-    specs: ['Athennian-light-spec.js'],
-
+    //specs: ['Athennian-light-spec.js'],
+    specs: ['Elements-spec.js'],
     // The address of a running selenium server.
     //seleniumAddress: 'http://199.116.235.89:4444/wd/hub/',
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
@@ -46,7 +46,7 @@ exports.config = {
         isVerbose: true,
         print: function() {}
     },
-
+    baseUrl: "https://labs.athennian.com",
     seleniumSeverJar: './node_modules/selenium-server/lib/runner/selenium-server-standalone-3.6.0.jar',
 
     onPrepare: function() {
@@ -59,7 +59,7 @@ exports.config = {
                 displayErrorMessages: true,
                 displayFailed: true,
                 displayPending: false,
-                displayStacktrace: false,
+                displayStacktrace: true,
                 displaySuccessful: true,
             },
             colors: {
@@ -73,7 +73,7 @@ exports.config = {
                 displayErrorMessages: true,
                 displayFailed: true,
                 displayPending: true,
-                displayStacktrace: false,
+                displayStacktrace: true,
                 displaySuccessful: true,
             },
         }));
