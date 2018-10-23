@@ -75,12 +75,9 @@ describe('Minutebookpeople - spec', function() {
             })
             //Clicks on confirm button
         it('Clicks on Confirm button', function() {
-            Documents.ClicksOnComfirmButton();
-        })
-
-
-
-        // //Clicks on import button
+                Documents.ClicksOnComfirmButton();
+            })
+            // //Clicks on import button
         it('Clicks on import button', function() {
                 Documents.ClicksOnImportButton();
 
@@ -92,7 +89,44 @@ describe('Minutebookpeople - spec', function() {
 
         //Clicks on create button
         it('Clicks on create button', function() {
-            Documents.ClicksOnCreateButton();
+                Documents.ClicksOnCreateButton();
+            })
+            //Modidies new person info
+        it('should click on person', function() {
+            Documents.ModifyNewPersonInfo();
+        })
+        it('Changes first name', function() {
+            Documents.ModifiesFirstName();
+        })
+        it("Modifies middle name", function() {
+            Documents.ModifiesMiddleName();
+        })
+        it('Modifies last name', function() {
+            Documents.ModifiesLastName();
+        })
+        it('Modifies email', function() {
+            Documents.ModifiesEmail();
+        })
+        it('Adds primary number', function() {
+            Documents.AddsPrimaryNumber();
+        })
+        it('Adds Occupation', function() {
+            Documents.AddsOccupation();
+        })
+        it('Adds Residency', function() {
+            Documents.AddsResidency();
+        })
+        it('Adds execution', function() {
+            Documents.AddsExecution();
+        })
+        it('Modifies Bio', function() {
+            Documents.ModifiesBio();
+        })
+        it('Modifies status', function() {
+            Documents.ModifiesStatus();
+        })
+        it('Saves modified person', function() {
+            Documents.SaveModiefiedPerson();
         })
     })
 
