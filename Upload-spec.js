@@ -1,12 +1,12 @@
 var Signature = require('./lib/Signature')
 var login = require('./lib/Login')
 var Documents = require('./lib/Documents')
-describe('Login', function() {
-    //1. login begin
-    var DocumentSignatureCaseManager = require('./lib/DocumentSignatureCaseManager')
+var DocumentSignatureCaseManager = require('./lib/DocumentSignatureCaseManager')
 
-    describe('Elements - spec', function() {
+describe('Upload - spec', function() {
 
+    describe('Login', function() {
+        //1. login begin
         it('should login', function() {
             login.login();
             login.validatelogin();
@@ -24,25 +24,13 @@ describe('Login', function() {
         it("Click on blank draft '+'", function() {
             Documents.Clickdraft();
         });
+        //Click on Upload button
+        it('Click on upload button', function() {
+            Documents.ClickOnUploadButton();
+        })
+        it('Choose a local file', function() {
+            Documents.ClickOnChooseALocalFileButton();
+        })
     })
-
-    describe('Create element', function() {
-        //clicks on element
-        it('Click on element tab', function() {
-            Documents.ClickonElementsIconInSidebar();
-        })
-        it('Click on +Field Button', function() {
-            Documents.ClickOnFieldButton();
-        })
-        it('Click on New Field Button', function() {
-            Documents.ClickOnNewFieldButton();
-        })
-        it('Add text to Variable 1', function() {
-            Documents.ClickOnVariable1Button();
-        })
-
-
-    })
-
 
 });

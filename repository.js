@@ -92,6 +92,36 @@ module.exports = {
             variable1Button: {
                 css: "input[placeholder='Enter value']"
             },
+            minutebookIcon: {
+                xpath: "//*[@uib-tooltip='Minute Book']//i"
+            },
+            peopleButtonSidebar: {
+                xpath: '//span[contains(.,"People")]'
+            },
+            newPeopleButton: {
+                xpath: '//*[@id="Main-MB"]/div/div[2]/div/div[1]/div/div/button'
+            },
+            dropdownButton: {
+                xpath: '/html/body/div[1]/div/div/div[2]/h4/div/div[2]'
+            },
+            confirm: {
+                xpath: '/html/body/div[1]/div/div/div[2]/h4/div/div[2]/ul/li[2]/a/span'
+            },
+            create: {
+                xpath: '//*[@id="block"]/div[2]/button[1]/span'
+            },
+            cancel: {
+                xpath: '//*[@id="block"]/div[2]/button[2]/span'
+            },
+            import: {
+                xpath: '//*[@id="block"]/div[2]/button[3]/span'
+            },
+            importPerson: {
+                xpath: '//*[@id="folderTreeView"]/div[2]/div/div[2]/a/div/div[1]/div/div[1]/span/strong'
+            }
+
+
+
         },
         textfields: {
             title: {
@@ -111,7 +141,41 @@ module.exports = {
             //added
             applySign: {
                 id: 'apply-sign'
-            }
+            },
+            //added
+            lastName: {
+                xpath: "//*[@id='personForm']/div/div[1]/p[1]/input"
+            },
+            firstName: {
+                xpath: "//*[@id='personForm']/div/div[1]/input[1]"
+            },
+            email: {
+                xpath: "//*[@id='personForm']/div/div[1]/p[7]/input"
+            },
+            bioSection: {
+                model: 'person._ext.bio'
+            },
+            street: {
+                xpath: '//*[@id="personForm"]/div/div[2]/input[1]'
+            },
+            city: {
+                xpath: '//*[@id="personForm"]/div/div[2]/input[2]'
+            },
+            province: {
+                xpath: '//*[@id="personForm"]/div/div[2]/input[3]'
+            },
+            country: {
+                xpath: '//*[@id="personForm"]/div/div[2]/input[4]'
+            },
+            postalCode: {
+                xpath: '//*[@id="personForm"]/div/div[2]/input[5]'
+            },
+
+
+
+
+
+
         },
         //added
         iframe: {
