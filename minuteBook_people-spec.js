@@ -128,6 +128,12 @@ describe('Minutebookpeople - spec', function() {
         it('Saves modified person', function() {
             Documents.SaveModiefiedPerson();
         })
+        it('Clicks on status1', function() {
+            Documents.ModifiedStatus1();
+        })
+        it('Deletes a Person', function() {
+            Documents.DeletesPerson();
+        })
     })
 
 });

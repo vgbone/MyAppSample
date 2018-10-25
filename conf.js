@@ -6,30 +6,28 @@ exports.config = {
     getPageTimeout: 30000,
 
     // Capabilities to be passed to the webdriver instance.
-    multiCapabilities: [
-        // {
+    multiCapabilities: [{
         //     browserName: 'firefox',
         //     count: 1,
         //     marionnette: true,
         //     shardTestFiles: false,
         //     maxInstances: 2,
-        // },
-        {
-            browserName: 'chrome',
-            count: 1,
-            chromeOptions: {
-                args: ["--no-sandbox", "--disable-dev-shm-usage"]
-            },
-            shardTestFiles: true,
-            maxInstances: 2
-        }
-    ],
+        // }
+        // {
+        browserName: 'chrome',
+        count: 1,
+        chromeOptions: {
+            args: ["--no-sandbox", "--disable-dev-shm-usage"]
+        },
+        shardTestFiles: true,
+        maxInstances: 2
+    }],
 
     // Spec patterns are relative to the configuration file location passed
     // to protractor (in this example conf.js).
     // They may include glob patterns.
     //specs: ['Athennian-light-spec.js'],
-    specs: ['minuteBook_people-spec.js'],
+    specs: ['people-spec.js'],
     // The address of a running selenium server.
     //seleniumAddress: 'http://199.116.235.89:4444/wd/hub/',
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
