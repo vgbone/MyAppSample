@@ -46,6 +46,8 @@ module.exports = {
             }
         }
     },
+
+
     //2. document settings
     documents: {
         buttons: {
@@ -128,6 +130,55 @@ module.exports = {
             modifiesStatus: {
                 xpath: '//*[@id="profileForm"]/div/div/div/div[2]/div[1]/div/div/ul/li[3]/a'
             },
+            addresses: {
+                xpath: '//*[@id="mb-side-menu"]/li[2]/a/span'
+            },
+            opensAddressSelection: {
+                xpath: '//*[@id="Document-List"]/tbody/tr/td[2]'
+            },
+            attention: {
+                xpath: '//*[@id="wrapper"]/form/div/input[2]'
+            },
+            primaryNumber: {
+                xpath: '//*[@id="wrapper"]/form/div/input[8]'
+            },
+            emailTextarea: {
+                xpath: '//*[@id="wrapper"]/form/div/input[9]'
+            },
+            notesArea: {
+                xpath: '//*[@id="wrapper"]/form/div/div[13]/textarea'
+            },
+            adminstration: {
+                xpath: '//span[contains(., "Administration ")]'
+            },
+            plusSignAdmin: {
+                xpath: '//*[@id="cancel-sign"]/i'
+            },
+            selectMemberDD: {
+                xpath: '//*[@id="profileForm"]/div/div/div/div[4]/div[1]/div/div[1]/div/button'
+            },
+            selectMember: {
+                xpath: '//*[@id="profileForm"]/div/div/div/div[4]/div[1]/div/div[1]/div/ul/li[4]/a'
+            },
+            officeDropdown: {
+                xpath: '//*[@id="profileForm"]/div/div/div/div[4]/div[1]/div/div[2]/div/button'
+            },
+            selectsOffice: {
+                xpath: '//*[@id="profileForm"]/div/div/div/div[4]/div[1]/div/div[2]/div/ul/li[4]/a'
+            },
+            roleDropdown: {
+                xpath: '//*[@id="profileForm"]/div/div/div/div[4]/div[1]/div/div[3]/div/button'
+            },
+            selectsRole: {
+                xpath: '//*[@id="profileForm"]/div/div/div/div[4]/div[1]/div/div[3]/div/ul/li[2]/a'
+            },
+            selectsHistory: {
+                xpath: '//*[@id="mb-side-menu"]/li[5]/a/span'
+            },
+
+
+
+
 
         },
         textfields: {
