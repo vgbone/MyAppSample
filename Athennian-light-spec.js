@@ -10,11 +10,6 @@ describe('Athennian - light spec', function() {
         it('should login', function() {
             login.login();
             login.validatelogin();
-<<<<<<< HEAD
-            // loginPage.getLoginPage();
-            // loginPage.login();
-=======
->>>>>>> pqa-july-2018
         });
         //1. login end
     })
@@ -30,6 +25,8 @@ describe('Athennian - light spec', function() {
             Documents.Clickdraft();
         });
     })
+
+
 
     describe('Alter document', function() {
         it('Click on title area.  Type new title', function() {
