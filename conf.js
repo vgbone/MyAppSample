@@ -27,7 +27,7 @@ exports.config = {
     // to protractor (in this example conf.js).
     // They may include glob patterns.
     //specs: ['Athennian-light-spec.js'],
-    specs: ['people-spec.js'],
+    specs: ['people-sidebar-spec.js'],
     // The address of a running selenium server.
     //seleniumAddress: 'http://199.116.235.89:4444/wd/hub/',
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub/',
