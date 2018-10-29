@@ -26,6 +26,8 @@ describe('Athennian - light spec', function() {
         });
     })
 
+
+
     describe('Alter document', function() {
         it('Click on title area.  Type new title', function() {
             Documents.SelectClickOnTitleAreaTypeNewTitle();
